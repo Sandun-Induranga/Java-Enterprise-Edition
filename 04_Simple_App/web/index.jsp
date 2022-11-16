@@ -1,4 +1,8 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="model.CustomerDTO" %>
+<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,6 +25,27 @@
 </head>
 
 <body class="container-fluid">
+
+<%
+
+    //    ArrayList<model.CustomerDTO> customerDTOS;
+
+//    Class.forName("com.mysql.jdbc.Driver");
+//    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
+//    PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer");
+//    ResultSet resultSet = pstm.executeQuery();
+//
+//    while (resultSet.next()){
+//        System.out.println("Come");
+//    }
+    ArrayList<CustomerDTO> customerDTOS = new ArrayList<>();
+    customerDTOS.add(new CustomerDTO("C00-001", "Dasun", "Galle", 10000));
+    customerDTOS.add(new CustomerDTO("C00-002", "Dasun", "Galle", 10000));
+    customerDTOS.add(new CustomerDTO("C00-003", "Dasun", "Galle", 10000));
+    customerDTOS.add(new CustomerDTO("C00-004", "Dasun", "Galle", 10000));
+    customerDTOS.add(new CustomerDTO("C00-005", "Dasun", "Galle", 10000));
+
+%>
 
 <main class="d-flex row align-items-center justify-content-center">
 
@@ -78,7 +103,7 @@
         <div class="row">
             <nav class="navbar">
                 <div class="container-fluid d-flex flex-column flex-lg-row">
-                    <form class="d-flex flex-column flex-lg-row" role="search" method="get">
+                    <form class="d-flex flex-column flex-lg-row" role="search" method="get" id="form1">
                         <input class="form-control me-2 mb-2 mb-lg-0" type="search" placeholder="Search"
                                aria-label="Search" id="txtSearch">
                         <button class="btn btn-warning dropdown-toggle me-2 mb-2 mb-lg-0" type="button"
@@ -99,7 +124,7 @@
                     </button>
 
                     <!-- Get All Button -->
-                    <button type="button" class="btn btn-dark" id="btnGetAll">
+                    <button type="submit" class="btn btn-dark" id="btnGetAll" form="form1" formaction="index.jsp">
                         Get All
                     </button>
                 </div>
@@ -140,7 +165,9 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success" form="customerForm" formaction="customer" formmethod="post">Save</button>
+                        <button type="submit" class="btn btn-success" form="customerForm" formaction="customer"
+                                formmethod="post">Save
+                        </button>
                     </div>
                 </div>
             </div>
@@ -159,6 +186,41 @@
                 </tr>
                 </thead>
                 <tbody id="body">
+
+                <%
+                    try {
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
+                        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer");
+                        ResultSet resultSet = pstm.executeQuery();
+                        ArrayList<CustomerDTO> customerDTOs = new ArrayList<>();
+                        while (resultSet.next()) {
+                            try {
+                                if (!resultSet.next()) break;
+                            } catch (SQLException throwables) {
+                                throwables.printStackTrace();
+                            }
+                            customerDTOS.add(new CustomerDTO(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4)));
+                        }
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                    for (CustomerDTO customerDTO : customerDTOS) {
+                %>
+                <tr>
+                    <td><%=customerDTO.getId()%>
+                    </td>
+                    <td><%=customerDTO.getName()%>
+                    </td>
+                    <td><%=customerDTO.getAddress()%>
+                    </td>
+                    <td><%=customerDTO.getSalary()%>
+                    </td>
+                </tr>
+                <%
+                    }
+
+                %>
 
                 </tbody>
             </table>

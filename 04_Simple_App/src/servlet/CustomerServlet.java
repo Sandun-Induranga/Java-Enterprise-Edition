@@ -38,6 +38,8 @@ public class CustomerServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+        resp.sendRedirect("index.jsp");
+
     }
 //        PrintWriter writer = resp.getWriter();
 //        writer.write("INSERT INTO Customer VALUES ("+cusId+","+cusName+","+cusAddress+","+cusSalary+")");
