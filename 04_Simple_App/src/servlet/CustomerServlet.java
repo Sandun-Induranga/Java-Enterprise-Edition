@@ -19,10 +19,10 @@ import java.sql.SQLException;
  * @since : 0.1.0
  **/
 
-@WebServlet(urlPatterns = "/customer")
+//@WebServlet(urlPatterns = "/customer")
 public class CustomerServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String cusId = req.getParameter("cusId");
         String cusName = req.getParameter("cusName");
         String cusAddress = req.getParameter("cusAddress");
