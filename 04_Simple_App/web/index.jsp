@@ -195,13 +195,17 @@
                         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
                         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer");
                         ResultSet resultSet = pstm.executeQuery();
+
                         while (resultSet.next()) {
                             customerDTOs.add(new CustomerDTO(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4)));
                         }
+
                     } catch (SQLException | ClassNotFoundException e) {
                         e.printStackTrace();
                     }
+
                     for (CustomerDTO customerDTO : customerDTOs) {
+
                 %>
                 <tr>
                     <td><%=customerDTO.getId()%>
