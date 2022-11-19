@@ -38,12 +38,12 @@
 //    while (resultSet.next()){
 //        System.out.println("Come");
 //    }
-    ArrayList<CustomerDTO> customerDTOS = new ArrayList<>();
-    customerDTOS.add(new CustomerDTO("C00-001", "Dasun", "Galle", 10000));
-    customerDTOS.add(new CustomerDTO("C00-002", "Dasun", "Galle", 10000));
-    customerDTOS.add(new CustomerDTO("C00-003", "Dasun", "Galle", 10000));
-    customerDTOS.add(new CustomerDTO("C00-004", "Dasun", "Galle", 10000));
-    customerDTOS.add(new CustomerDTO("C00-005", "Dasun", "Galle", 10000));
+
+//    customerDTOS.add(new CustomerDTO("C00-001", "Dasun", "Galle", 10000));
+//    customerDTOS.add(new CustomerDTO("C00-002", "Dasun", "Galle", 10000));
+//    customerDTOS.add(new CustomerDTO("C00-003", "Dasun", "Galle", 10000));
+//    customerDTOS.add(new CustomerDTO("C00-004", "Dasun", "Galle", 10000));
+//    customerDTOS.add(new CustomerDTO("C00-005", "Dasun", "Galle", 10000));
 
 %>
 
@@ -188,24 +188,20 @@
                 <tbody id="body">
 
                 <%
+                    //                    ArrayList<CustomerDTO> customerDTOS = new ArrayList<>();
+                    ArrayList<CustomerDTO> customerDTOs = new ArrayList<>();
                     try {
                         Class.forName("com.mysql.jdbc.Driver");
                         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
                         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer");
                         ResultSet resultSet = pstm.executeQuery();
-                        ArrayList<CustomerDTO> customerDTOs = new ArrayList<>();
                         while (resultSet.next()) {
-                            try {
-                                if (!resultSet.next()) break;
-                            } catch (SQLException throwables) {
-                                throwables.printStackTrace();
-                            }
-                            customerDTOS.add(new CustomerDTO(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4)));
+                            customerDTOs.add(new CustomerDTO(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4)));
                         }
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
+                    } catch (SQLException | ClassNotFoundException e) {
+                        e.printStackTrace();
                     }
-                    for (CustomerDTO customerDTO : customerDTOS) {
+                    for (CustomerDTO customerDTO : customerDTOs) {
                 %>
                 <tr>
                     <td><%=customerDTO.getId()%>

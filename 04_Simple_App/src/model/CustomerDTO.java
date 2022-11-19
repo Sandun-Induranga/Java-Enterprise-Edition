@@ -8,6 +8,7 @@ import lombok.*;
  **/
 
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 @Data
 public class CustomerDTO {
