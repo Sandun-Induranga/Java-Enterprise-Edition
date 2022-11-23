@@ -218,7 +218,7 @@
                     </td>
                     <td>
                         <form action="customer">
-                            <button type="button" class="border border-0 customer-edits" onclick="editOnAction()"><i class="bi bi-pencil-fill text-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i></button>
+                            <button type="button" class="border border-0 customer-edits"><i class="bi bi-pencil-fill text-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i></button>
                             <button class="border border-0"><i class="bi bi-trash text-danger"></i></button>
                         </form>
                     </td>
@@ -242,24 +242,24 @@
 <script>
     // Edit button on action
 
-        function editOnAction () {
-            var id = $(this).parent().parent().children(":eq(0)").text();
+        $(".customer-edits").on("click", function () {
+            var id = $(this).parent().parent().parent().children(":eq(0)").text();
 
-            var name = $(this).parent().parent().children(":eq(1)").text();
+            var name = $(this).parent().parent().parent().children(":eq(1)").text();
 
-            var address = $(this).parent().parent().children(":eq(2)").text();
+            var address = $(this).parent().parent().parent().children(":eq(2)").text();
 
-            var salary = $(this).parent().parent().children(":eq(3)").text();
+            var salary = $(this).parent().parent().parent().children(":eq(3)").text();
 
             setCustomerTextFields(id, name, address, salary);
             $("#btnSaveCustomer").text("Update");
-        }
+        });
 
     function setCustomerTextFields(id, name, address, salary) {
-        $("#txtCusId").val(id);
-        $("#txtCusName").val(name);
-        $("#txtAddress").val(address);
-        $("#txtSalary").val(salary);
+        $("#cusId").val(id);
+        $("#cusName").val(name);
+        $("#cusAddress").val(address);
+        $("#cusSalary").val(salary);
     }
 </script>
 
