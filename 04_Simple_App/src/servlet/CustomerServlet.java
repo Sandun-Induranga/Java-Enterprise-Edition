@@ -1,6 +1,7 @@
 package servlet;
 
 import db.DBConnection;
+import model.CustomerDTO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * @author : Sandun Induranga
@@ -24,11 +26,37 @@ public class CustomerServlet extends HttpServlet {
         String cusName = req.getParameter("cusName");
         String cusAddress = req.getParameter("cusAddress");
         String cusSalary = req.getParameter("cusSalary");
+
         //Save Customer
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
+            PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer");
+            ResultSet resultSet = pstm.executeQuery();
+
+            while (resultSet.next()) {
+                if (resultSet.getString(1).equals(cusId)){
+                    pstm = connection.prepareStatement("UPDATE Customer SET customerName = ?, address = ?, salary = ? WHERE customerId = ?");
+
+                    pstm.setString(1, cusName);
+                    pstm.setString(2, cusAddress);
+                    pstm.setString(3, cusSalary);
+                    pstm.setString(4, cusId);
+                    pstm.executeUpdate();
+                    return;
+                }
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+
+            System.out.println("come");
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
             PreparedStatement pstm = connection.prepareStatement("INSERT INTO Customer VALUES (?,?,?,?)");
+
             pstm.setString(1, cusId);
             pstm.setString(2, cusName);
             pstm.setString(3, cusAddress);
