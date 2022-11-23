@@ -166,7 +166,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-success" form="customerForm" formaction="customer"
-                                formmethod="post">Save
+                                formmethod="post" id="btnSaveCustomer">Save
                         </button>
                     </div>
                 </div>
