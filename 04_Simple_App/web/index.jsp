@@ -216,6 +216,10 @@
                     </td>
                     <td><%=customerDTO.getSalary()%>
                     </td>
+                    <td>
+                        <i class="bi bi-pencil-fill text-success"></i>
+                        <i class="bi bi-trash text-danger"></i>
+                    </td>
                 </tr>
                 <%
                     }
