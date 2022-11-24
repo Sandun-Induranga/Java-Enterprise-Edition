@@ -46,7 +46,7 @@ public class CustomerServlet extends HttpServlet {
 
             } else if (option.equals("update")){
 
-                PreparedStatement pstm = connection.prepareStatement("UPDATE Customer SET customerName=?, address=?, salary=? WHERE customerId = ?");
+                PreparedStatement pstm = connection.prepareStatement("UPDATE Customer SET customerName=?, address=?, salary=? WHERE customerId=?");
 
                 pstm.setString(1, cusName);
                 pstm.setString(2, cusAddress);

@@ -257,10 +257,10 @@
         });
 
     function setCustomerTextFields(id, name, address, salary) {
-        $("#cusId").val(id);
-        $("#cusName").val(name);
-        $("#cusAddress").val(address);
-        $("#cusSalary").val(salary);
+        $("#cusId").val(id.trim());
+        $("#cusName").val(name.trim());
+        $("#cusAddress").val(address.trim());
+        $("#cusSalary").val(salary.trim());
     }
 </script>
 
