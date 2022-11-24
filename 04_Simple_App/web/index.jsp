@@ -164,7 +164,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+                        <button name="" type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-success" form="customerForm" formaction="customer"
                                 formmethod="post" id="btnSaveCustomer">Save
                         </button>
@@ -253,6 +253,7 @@
 
             setCustomerTextFields(id, name, address, salary);
             $("#btnSaveCustomer").text("Update");
+            $("#cusId").attr("name", "updatedCusId");
         });
 
     function setCustomerTextFields(id, name, address, salary) {
