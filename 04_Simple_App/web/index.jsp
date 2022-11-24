@@ -217,13 +217,13 @@
                     </td>
                     <td><%=customerDTO.getSalary()%>
                     </td>
-                    <td>
+                    <td class="">
                         <form id="buttons">
                             <button type="button" class="border border-0 customer-edits"><i
                                     class="bi bi-pencil-fill text-success" data-bs-toggle="modal"
                                     data-bs-target="#staticBackdrop"></i></button>
-                            <button class="border border-0"><i class="bi bi-trash text-danger"></i></button>
                         </form>
+                        <button class="border border-0 customer-deletes" form="customerForm" formaction="customer?option=delete" formmethod="post"><i class="bi bi-trash text-danger"></i></button>
                     </td>
                 </tr>
                 <%
@@ -253,6 +253,20 @@
         var address = $(this).parent().parent().parent().children(":eq(2)").text();
 
         var salary = $(this).parent().parent().parent().children(":eq(3)").text();
+
+        setCustomerTextFields(id, name, address, salary);
+        $("#btnSaveCustomer").text("Update");
+        $("#btnSaveCustomer").attr("formaction", "customer?option=update");
+    });
+
+    $(".customer-deletes").on("click", function () {
+        var id = $(this).parent().parent().children(":eq(0)").text();
+
+        var name = $(this).parent().parent().children(":eq(1)").text();
+
+        var address = $(this).parent().parent().children(":eq(2)").text();
+
+        var salary = $(this).parent().parent().children(":eq(3)").text();
 
         setCustomerTextFields(id, name, address, salary);
         $("#btnSaveCustomer").text("Update");

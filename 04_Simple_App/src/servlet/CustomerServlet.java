@@ -22,6 +22,7 @@ import java.util.ArrayList;
 public class CustomerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String cusId = req.getParameter("cusId");
         String cusName = req.getParameter("cusName");
         String cusAddress = req.getParameter("cusAddress");
@@ -34,26 +35,42 @@ public class CustomerServlet extends HttpServlet {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
 
             System.out.println(option);
-            if (option.equals("add")) {
+            switch (option) {
+                case "add": {
 
-                PreparedStatement pstm = connection.prepareStatement("INSERT INTO Customer VALUES (?,?,?,?)");
+                    PreparedStatement pstm = connection.prepareStatement("INSERT INTO Customer VALUES (?,?,?,?)");
 
-                pstm.setString(1, cusId);
-                pstm.setString(2, cusName);
-                pstm.setString(3, cusAddress);
-                pstm.setDouble(4, cusSalary);
-                pstm.executeUpdate();
+                    pstm.setString(1, cusId);
+                    pstm.setString(2, cusName);
+                    pstm.setString(3, cusAddress);
+                    pstm.setDouble(4, cusSalary);
+                    pstm.executeUpdate();
+                    break;
 
-            } else if (option.equals("update")){
+                }
+                case "update": {
 
-                PreparedStatement pstm = connection.prepareStatement("UPDATE Customer SET customerName=?, address=?, salary=? WHERE customerId=?");
+                    PreparedStatement pstm = connection.prepareStatement("UPDATE Customer SET customerName=?, address=?, salary=? WHERE customerId=?");
 
-                pstm.setString(1, cusName);
-                pstm.setString(2, cusAddress);
-                pstm.setDouble(3, cusSalary);
-                pstm.setString(4, cusId);
-                pstm.executeUpdate();
+                    pstm.setString(1, cusName);
+                    pstm.setString(2, cusAddress);
+                    pstm.setDouble(3, cusSalary);
+                    pstm.setString(4, cusId);
+                    pstm.executeUpdate();
+                    break;
+
+                }
+                case "delete": {
+                    System.out.println(cusId+option);
+                    PreparedStatement pstm = connection.prepareStatement("DELETE FROM Customer WHERE customerId=?");
+
+                    pstm.setString(1, cusId);
+                    pstm.executeUpdate();
+                    break;
+
+                }
             }
+
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
