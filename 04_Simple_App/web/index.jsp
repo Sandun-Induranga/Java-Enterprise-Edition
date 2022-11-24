@@ -166,7 +166,7 @@
                     <div class="modal-footer">
                         <button name="" type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-success" form="customerForm"
-                                formaction="customer?option=add"
+                                formaction="customer?operation=add"
                                 formmethod="post" id="btnSaveCustomer">Save
                         </button>
                     </div>
@@ -223,7 +223,7 @@
                                     class="bi bi-pencil-fill text-success" data-bs-toggle="modal"
                                     data-bs-target="#staticBackdrop"></i></button>
                         </form>
-                        <button class="border border-0 customer-deletes" form="customerForm" formaction="customer?option=delete" formmethod="post"><i class="bi bi-trash text-danger"></i></button>
+                        <button class="border border-0 customer-deletes" form="customerForm" formaction="customer?operation=delete" formmethod="post"><i class="bi bi-trash text-danger"></i></button>
                     </td>
                 </tr>
                 <%
@@ -256,7 +256,7 @@
 
         setCustomerTextFields(id, name, address, salary);
         $("#btnSaveCustomer").text("Update");
-        $("#btnSaveCustomer").attr("formaction", "customer?option=update");
+        $("#btnSaveCustomer").attr("formaction", "customer?operation=update");
     });
 
     $(".customer-deletes").on("click", function () {
@@ -270,7 +270,7 @@
 
         setCustomerTextFields(id, name, address, salary);
         $("#btnSaveCustomer").text("Update");
-        $("#btnSaveCustomer").attr("formaction", "customer?option=update");
+        $("#btnSaveCustomer").attr("formaction", "customer?operation=update");
     });
 
     function setCustomerTextFields(id, name, address, salary) {
@@ -282,7 +282,7 @@
 
     $("#btnGetAll").on("click", function () {
         $("#btnSaveCustomer").text("Update");
-        $("#btnSaveCustomer").attr("formaction", "customer?option=add");
+        $("#btnSaveCustomer").attr("formaction", "customer?operation=add");
     })
 
 </script>

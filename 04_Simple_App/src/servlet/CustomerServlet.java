@@ -27,15 +27,15 @@ public class CustomerServlet extends HttpServlet {
         String cusName = req.getParameter("cusName");
         String cusAddress = req.getParameter("cusAddress");
         double cusSalary = Double.parseDouble(req.getParameter("cusSalary"));
-        String option = req.getParameter("option");
+        String operation = req.getParameter("operation");
 
         //Save Customer
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
 
-            System.out.println(option);
-            switch (option) {
+            System.out.println(operation);
+            switch (operation) {
                 case "add": {
 
                     PreparedStatement pstm = connection.prepareStatement("INSERT INTO Customer VALUES (?,?,?,?)");
@@ -61,7 +61,7 @@ public class CustomerServlet extends HttpServlet {
 
                 }
                 case "delete": {
-                    System.out.println(cusId+option);
+                    System.out.println(cusId+operation);
                     PreparedStatement pstm = connection.prepareStatement("DELETE FROM Customer WHERE customerId=?");
 
                     pstm.setString(1, cusId);
