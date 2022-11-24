@@ -23,34 +23,35 @@ public class CustomerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String cusId = req.getParameter("cusId");
-        String updatedCusId = req.getParameter("updatedCusId");
         String cusName = req.getParameter("cusName");
         String cusAddress = req.getParameter("cusAddress");
-        String cusSalary = req.getParameter("cusSalary");
-
-        System.out.println(updatedCusId);
-        System.out.println(cusId);
+        double cusSalary = Double.parseDouble(req.getParameter("cusSalary"));
+        String option = req.getParameter("option");
 
         //Save Customer
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
 
-            if (cusId == null) {
-                PreparedStatement pstm = connection.prepareStatement("UPDATE Customer SET customerName=?, address=?, salary=? WHERE customerId = ?");
+            System.out.println(option);
+            if (option.equals("add")) {
 
-                pstm.setString(1, cusName);
-                pstm.setString(2, cusAddress);
-                pstm.setString(3, cusSalary);
-                pstm.setString(4, updatedCusId);
-                pstm.executeUpdate();
-            } else {
                 PreparedStatement pstm = connection.prepareStatement("INSERT INTO Customer VALUES (?,?,?,?)");
 
                 pstm.setString(1, cusId);
                 pstm.setString(2, cusName);
                 pstm.setString(3, cusAddress);
-                pstm.setString(4, cusSalary);
+                pstm.setDouble(4, cusSalary);
+                pstm.executeUpdate();
+
+            } else if (option.equals("update")){
+
+                PreparedStatement pstm = connection.prepareStatement("UPDATE Customer SET customerName=?, address=?, salary=? WHERE customerId = ?");
+
+                pstm.setString(1, cusName);
+                pstm.setString(2, cusAddress);
+                pstm.setDouble(3, cusSalary);
+                pstm.setString(4, cusId);
                 pstm.executeUpdate();
             }
         } catch (ClassNotFoundException | SQLException e) {

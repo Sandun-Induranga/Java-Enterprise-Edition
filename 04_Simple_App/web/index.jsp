@@ -165,7 +165,7 @@
 
                     <div class="modal-footer">
                         <button name="" type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success" form="customerForm" formaction="customer"
+                        <button type="submit" class="btn btn-success" form="customerForm" formaction="customer?option=add"
                                 formmethod="post" id="btnSaveCustomer">Save
                         </button>
                     </div>
@@ -217,7 +217,7 @@
                     <td><%=customerDTO.getSalary()%>
                     </td>
                     <td>
-                        <form action="customer">
+                        <form id="buttons" >
                             <button type="button" class="border border-0 customer-edits"><i class="bi bi-pencil-fill text-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i></button>
                             <button class="border border-0"><i class="bi bi-trash text-danger"></i></button>
                         </form>
@@ -253,7 +253,7 @@
 
             setCustomerTextFields(id, name, address, salary);
             $("#btnSaveCustomer").text("Update");
-            $("#cusId").attr("name", "updatedCusId");
+            $("#btnSaveCustomer").attr("formaction", "customer?option=update");
         });
 
     function setCustomerTextFields(id, name, address, salary) {
