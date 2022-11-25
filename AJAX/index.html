@@ -117,7 +117,7 @@
 
                                 <!-- Form -->
                                 <div class="d-flex justify-content-center">
-                                    <form class="w-75">
+                                    <form class="w-75" id="itemForm">
                                         <div class="mb-3">
                                             <label for="code" class="form-label">Item Code</label>
                                             <input type="text" class="form-control" id="code">
@@ -139,7 +139,7 @@
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Clear</button>
-                                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" id="btnSave">
+                                    <button type="button" class="btn btn-success" form="itemForm" formmethod="get" formaction="db/db.txt" id="btnSave">
                                         Save
                                     </button>
                                 </div>
@@ -179,57 +179,22 @@
 
 <script>
 
-    let items = [];
+    $("#btnSave").on("click",function () {
 
-    $("#btnSave").click(function () {
-        let code = $("#code").val();
-        let name = $("#itemName").val();
-        let price = $("#price").val();
-        let qty = $("#qtyOnHand").val();
+        // Initializing XMLHttpRequest
+        let httpRequest = new XMLHttpRequest();
+        console.log(httpRequest.readyState); // 0 - uninitialized
 
-        let item = {
-            code: code,
-            name: name,
-            price: price,
-            qty: qty
-        };
+        httpRequest.open("get","db/db.txt");
+        console.log(httpRequest.readyState); // 1 - loading
 
-        items.push(item);
-
-        loadAllItems();
-
-    });
-
-    $('#txtSearch').keypress(function () {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
-        if (keycode == '13') {
-            $("#tblItem > tbody").empty();
-            for (let item of items) {
-                if (item.code === $("#txtSearch").val()) {
-                    $("#tblItem > tbody").append(
-                        `<tr><td>${item.code}</td><td>${item.name}</td><td>${item.price}</td><td>${item.qty}</td><td><i class="bi bi-pencil-fill text-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i><i class="bi bi-trash text-danger"></i></td></tr>`
-                    );
-                }
-            }
+        httpRequest.onload = function() {
+            console.log(httpRequest.responseText);
         }
 
-    });
+        httpRequest.send();
 
-    $("#btnGetAll").click(function () {
-        loadAllItems();
-    });
 
-    function loadAllItems() {
-        $("#tblItem tbody").empty();
-        for (let item of items) {
-            $("#tblItem > tbody").append(
-                `<tr><td>${item.code}</td><td>${item.name}</td><td>${item.price}</td><td>${item.qty}</td><td><i class="bi bi-pencil-fill text-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i><i class="bi bi-trash text-danger"></i></td></tr>`
-            );
-        }
-    }
-
-    $(function() {
-        $("form").submit(function() { return false; });
     });
 
 </script>
