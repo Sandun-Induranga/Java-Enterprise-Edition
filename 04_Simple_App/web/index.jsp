@@ -27,7 +27,6 @@
 <body class="container-fluid">
 
 <%
-
     //    ArrayList<model.CustomerDTO> customerDTOS;
 
 //    Class.forName("com.mysql.jdbc.Driver");
@@ -124,7 +123,7 @@
                     </button>
 
                     <!-- Get All Button -->
-                    <button type="submit" class="btn btn-dark" id="btnGetAll" form="form1" formaction="index.jsp">
+                    <button type="submit" class="btn btn-dark" id="btnGetAll" form="form1" formaction="customer" formmethod="get">
                         Get All
                     </button>
                 </div>
@@ -190,20 +189,8 @@
 
                 <%
                     //                    ArrayList<CustomerDTO> customerDTOS = new ArrayList<>();
-                    ArrayList<CustomerDTO> customerDTOs = new ArrayList<>();
-                    try {
-                        Class.forName("com.mysql.jdbc.Driver");
-                        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
-                        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer");
-                        ResultSet resultSet = pstm.executeQuery();
+                    ArrayList<CustomerDTO> customerDTOs = (ArrayList<CustomerDTO>) request.getAttribute("customers");
 
-                        while (resultSet.next()) {
-                            customerDTOs.add(new CustomerDTO(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4)));
-                        }
-
-                    } catch (SQLException | ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
 
                     for (CustomerDTO customerDTO : customerDTOs) {
 

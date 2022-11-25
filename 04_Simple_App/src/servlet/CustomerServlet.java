@@ -75,31 +75,30 @@ public class CustomerServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        resp.sendRedirect("index.jsp");
+        resp.sendRedirect("customer");
 
     }
-//        PrintWriter writer = resp.getWriter();
-//        writer.write("INSERT INTO Customer VALUES ("+cusId+","+cusName+","+cusAddress+","+cusSalary+")");
-//        writer.write("<h1>Customers</h1><table><thead><tr><th>Customer Id</th><th>Customer Name</th><th>Address</th><th>Salary</th><tbody'></tr></thead><tr><td>" + cusId + "</td><td>" + cusName + "</td><td>" + cusAddress + "</td><td>" + cusSalary + "</td></tr></tbody></table> <style> body{ width: 97.5vw; height: 97.5vh; display: flex; justify-content: center; align-items: center; flex-direction: column;} h1{font-size: 3.5em; color: crimson;} table{border-collapse: collapse;} table,tr,th,td{border: 1px solid black;} thead,tbody{padding: 10px;font-size: 2em;} thead{background: purple; color: white} th,td{width: 250px; height: 50px}</style>");
-//        System.out.println("INSERT INTO Customer VALUES ("+cusId+","+cusName+","+cusAddress+","+cusSalary+")");
-//        System.out.println(cusId);
-//    }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ArrayList<CustomerDTO> customerDTOs = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
+            PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer");
+            ResultSet resultSet = pstm.executeQuery();
 
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
-//            PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer");
-//            ResultSet resultSet = pstm.executeQuery();
-//
-//            while (resultSet.next()) {
-//                PrintWriter writer = resp.getWriter();
-//                writer.write("<h1>Customers</h1><table><thead><tr><th>Customer Id</th><th>Customer Name</th><th>Address</th><th>Salary</th><tbody'></tr></thead><tr><td>" + cusId + "</td><td>" + cusName + "</td><td>" + cusAddress + "</td><td>" + cusSalary + "</td></tr></tbody></table> <style> body{ width: 97.5vw; height: 97.5vh; display: flex; justify-content: center; align-items: center; flex-direction: column;} h1{font-size: 3.5em; color: crimson;} table{border-collapse: collapse;} table,tr,th,td{border: 1px solid black;} thead,tbody{padding: 10px;font-size: 2em;} thead{background: purple; color: white} th,td{width: 250px; height: 50px}</style>");
-//            }
-//        } catch (ClassNotFoundException | SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+            while (resultSet.next()) {
+                customerDTOs.add(new CustomerDTO(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4)));
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        req.setAttribute("customers", customerDTOs); // Can add key value for a req object
+
+        req.getRequestDispatcher("index.jsp").forward(req,resp);
+
+    }
 }

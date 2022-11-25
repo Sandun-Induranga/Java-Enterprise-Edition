@@ -5,6 +5,7 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="04_Simple_App" />
+          <element id="module-output" name="Mappling-Specifications" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="mysql-connector-java-8.0.28" />
@@ -12,6 +13,7 @@
         </element>
       </element>
       <element id="javaee-facet-resources" facet="04_Simple_App/web/Web" />
+      <element id="javaee-facet-resources" facet="Mappling-Specifications/web/Web" />
     </root>
   </artifact>
 </component>
