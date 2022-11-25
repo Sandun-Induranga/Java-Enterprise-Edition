@@ -4,10 +4,10 @@
     <root id="archive" name="mapping-specifications.war">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="Mappling-Specifications" />
+          <element id="module-output" name="Mapping-Specifications" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="Mappling-Specifications/web/Web" />
+      <element id="javaee-facet-resources" facet="Mapping-Specifications/web/Web" />
     </root>
   </artifact>
 </component>
