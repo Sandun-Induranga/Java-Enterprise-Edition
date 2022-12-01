@@ -9,11 +9,10 @@
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="mysql-connector-java-8.0.28" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.18/lombok-1.18.18.jar" />
+          <element id="file-copy" path="$APPLICATION_CONFIG_DIR$/.m2/repository/org/projectlombok/lombok/1.18.18/lombok-1.18.18.jar" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="04_Simple_App/web/Web" />
-      <element id="javaee-facet-resources" facet="Mappling-Specifications/web/Web" />
     </root>
   </artifact>
 </component>
