@@ -95,12 +95,14 @@
 
 
                     <!-- Add Items Button -->
-                    <button type="button" class="btn btn-dark me-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <button type="button" class="btn btn-dark me-2" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop">
                         Add New Item
                     </button>
 
                     <!-- Get All Button -->
-                    <button type="button" class="btn btn-dark" id="btnGetAll">
+                    <button type="button" class="btn btn-dark" id="btnGetAll" form="itemForm" formmethod="get"
+                            formaction="db/db.txt">
                         Get All
                     </button>
 
@@ -139,7 +141,8 @@
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Clear</button>
-                                    <button type="button" class="btn btn-success" form="itemForm" formmethod="get" formaction="db/db.txt" id="btnSave">
+                                    <button type="button" class="btn btn-success" form="itemForm" formmethod="get"
+                                            formaction="db/db.txt" id="btnSave">
                                         Save
                                     </button>
                                 </div>
@@ -162,7 +165,7 @@
                     <th scope="col">Options</th>
                 </tr>
                 </thead>
-                <tbody class="">
+                <tbody class="body-clz">
 
                 </tbody>
             </table>
@@ -179,7 +182,7 @@
 
 <script>
 
-    $("#btnSave").on("click",function () {
+    $("#btnSave").on("click", function () {
 
         // // Initializing XMLHttpRequest
         // let httpRequest = new XMLHttpRequest();
@@ -204,17 +207,39 @@
         // console.log(httpRequest.responseText);
         // console.log(httpRequest.readyState); // 4 - complete
 
-        let xmlHttpRequest = new XMLHttpRequest();
+        // let xmlHttpRequest = new XMLHttpRequest();
+        //
+        // xmlHttpRequest.open("get","db/db.txt");
+        // xmlHttpRequest.send();
+        // xmlHttpRequest.onreadystatechange = function () {
+        //     if (xmlHttpRequest.readyState == 4 &&xmlHttpRequest.status==200) { // if status code == 200, Success
+        //         console.log(xmlHttpRequest.responseText);
+        //         $("#staticBackdropLabel").text(xmlHttpRequest.responseText);
+        //     }
+        // }
 
-        xmlHttpRequest.open("get","db/db.txt");
-        xmlHttpRequest.send();
-        xmlHttpRequest.onreadystatechange = function () {
-            if (xmlHttpRequest.readyState == 4) {
-                console.log(xmlHttpRequest.responseText);
-            }
-        }
+        // console.log('Started');
+        // $.ajax({
+        //     url: "db/db.txt",
+        //     async: false, // Synchronous
+        //     success: function (res) {
+        //         console.log(res);
+        //     }
+        // });
+        // console.log('End');
 
     });
+
+    $("#btnGetAll").on("click", function () {
+        $.ajax({
+            url: "db/db.txt",
+            success: function (res) {
+                let split = res.split(" ");
+                $(".body-clz").append(`<tr><td>${split[0]}</td><td>${split[1]}</td><td>${split[2]}</td><td>${split[3]}</td></tr>`);
+            }
+        });
+    })
+
 
 </script>
 
