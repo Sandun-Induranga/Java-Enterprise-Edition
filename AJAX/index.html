@@ -103,7 +103,12 @@
                     <!-- Get All Button -->
                     <button type="button" class="btn btn-dark" id="btnGetAll" form="itemForm" formmethod="get"
                             formaction="db/db.txt">
-                        Get All
+                        Text
+                    </button>
+
+                    <button type="button" class="btn btn-dark" id="btnXMLAll" form="itemForm" formmethod="get"
+                            formaction="db/db.xml">
+                        XML
                     </button>
 
                     <!-- Modal -->
@@ -238,7 +243,20 @@
                 $(".body-clz").append(`<tr><td>${split[0]}</td><td>${split[1]}</td><td>${split[2]}</td><td>${split[3]}</td></tr>`);
             }
         });
-    })
+    });
+
+    $("#btnXMLAll").on("click", function () {
+        $.ajax({
+            url: "db/db.xml",
+            success: function (res) {
+
+                for (let i = 0; i < $(res).children().children().length; i++) {
+                    $(".body-clz").append(`<tr><td>${$(res).children(":eq(0)").children(`:eq(${i})`).children(":eq(0)").text()}</td><td>${$(res).children(":eq(0)").children(`:eq(${i})`).children(":eq(1)").text()}</td><td>${$(res).children(":eq(0)").children(`:eq(${i})`).children(":eq(2)").text()}</td><td>${$(res).children(":eq(0)").children(`:eq(${i})`).children(":eq(3)").text()}</td></tr>`);
+                }
+
+            }
+        });
+    });
 
 
 </script>
