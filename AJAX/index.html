@@ -111,6 +111,11 @@
                         XML
                     </button>
 
+                    <button type="button" class="btn btn-dark" id="btnJsonAll" form="itemForm" formmethod="get"
+                            formaction="db/db.xml">
+                        Json
+                    </button>
+
                     <!-- Modal -->
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
                          tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -252,6 +257,19 @@
 
                 for (let i = 0; i < $(res).children().children().length; i++) {
                     $(".body-clz").append(`<tr><td>${$(res).children(":eq(0)").children(`:eq(${i})`).children(":eq(0)").text()}</td><td>${$(res).children(":eq(0)").children(`:eq(${i})`).children(":eq(1)").text()}</td><td>${$(res).children(":eq(0)").children(`:eq(${i})`).children(":eq(2)").text()}</td><td>${$(res).children(":eq(0)").children(`:eq(${i})`).children(":eq(3)").text()}</td></tr>`);
+                }
+
+            }
+        });
+    });
+
+    $("#btnJsonAll").on("click", function () {
+        $.ajax({
+            url: "db/db.json",
+            success: function (res) {
+
+                for (let i = 0; i < res.length; i++) {
+                    $(".body-clz").append(`<tr><td>${res[i].code}</td><td>${res[i].name}</td><td>${res[i].qty}</td><td>${res[i].unitPrice}</td></tr>`);
                 }
 
             }
