@@ -116,6 +116,8 @@
                         Json
                     </button>
 
+                    <h1 id="h"></h1>
+
                     <!-- Modal -->
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
                          tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -251,14 +253,16 @@
     });
 
     $("#btnXMLAll").on("click", function () {
+        $("#h").text("Loading");
         $.ajax({
             url: "db/db.xml",
+
             success: function (res) {
 
                 for (let i = 0; i < $(res).children().children().length; i++) {
                     $(".body-clz").append(`<tr><td>${$(res).children(":eq(0)").children(`:eq(${i})`).children(":eq(0)").text()}</td><td>${$(res).children(":eq(0)").children(`:eq(${i})`).children(":eq(1)").text()}</td><td>${$(res).children(":eq(0)").children(`:eq(${i})`).children(":eq(2)").text()}</td><td>${$(res).children(":eq(0)").children(`:eq(${i})`).children(":eq(3)").text()}</td></tr>`);
                 }
-
+                $("#h").text("");
             }
         });
     });
