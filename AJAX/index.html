@@ -185,7 +185,10 @@
         let httpRequest = new XMLHttpRequest();
         console.log(httpRequest.readyState); // 0 - uninitialized
 
-        httpRequest.open("get","db/db.txt",false);
+        // Synchronous - Blocking
+        // Asynchronous - Non Blocking
+
+        httpRequest.open("get","db/db.txt",false); // false - synchronous
         console.log(httpRequest.readyState); // 1 - loading
 
         // httpRequest.onload = function() {
