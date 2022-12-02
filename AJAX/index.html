@@ -185,15 +185,18 @@
         let httpRequest = new XMLHttpRequest();
         console.log(httpRequest.readyState); // 0 - uninitialized
 
-        httpRequest.open("get","db/db.txt");
+        httpRequest.open("get","db/db.txt",false);
         console.log(httpRequest.readyState); // 1 - loading
 
-        httpRequest.onload = function() {
-            console.log(httpRequest.responseText);
-        }
+        // httpRequest.onload = function() {
+        //     console.log(httpRequest.responseText);
+        // }
 
         httpRequest.send();
+        console.log(httpRequest.readyState); // 4 - complete
 
+        console.log(httpRequest.responseText);
+        console.log(httpRequest.readyState); // 4 - complete
 
     });
 
