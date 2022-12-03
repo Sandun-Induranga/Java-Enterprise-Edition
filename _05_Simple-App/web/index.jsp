@@ -103,7 +103,8 @@
                     </button>
 
                     <!-- Get All Button -->
-                    <button type="submit" class="btn btn-dark" id="btnGetAll" form="form1" formaction="customer" formmethod="get">
+                    <button type="submit" class="btn btn-dark" id="btnGetAll" form="form1" formaction="customer"
+                            formmethod="get">
                         Get All
                     </button>
                 </div>
@@ -144,9 +145,7 @@
 
                     <div class="modal-footer">
                         <button name="" type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success" form="customerForm"
-                                formaction="customer?operation=add"
-                                formmethod="post" id="btnSaveCustomer">Save
+                        <button type="button" class="btn btn-success" form="customerForm" id="btnSaveCustomer">Save
                         </button>
                     </div>
                 </div>
@@ -171,8 +170,8 @@
                     //                    ArrayList<CustomerDTO> customerDTOS = new ArrayList<>();
                     ArrayList<CustomerDTO> customerDTOs = (ArrayList<CustomerDTO>) request.getAttribute("customers");
 
-
-                    for (CustomerDTO customerDTO : customerDTOs) {
+                    if (customerDTOs != null) {
+                        for (CustomerDTO customerDTO : customerDTOs) {
 
                 %>
                 <tr>
@@ -190,10 +189,13 @@
                                     class="bi bi-pencil-fill text-success" data-bs-toggle="modal"
                                     data-bs-target="#staticBackdrop"></i></button>
                         </form>
-                        <button class="border border-0 customer-deletes" form="customerForm" formaction="customer?operation=delete" formmethod="post"><i class="bi bi-trash text-danger"></i></button>
+                        <button class="border border-0 customer-deletes" form="customerForm"
+                                formaction="customer?operation=delete" formmethod="post"><i
+                                class="bi bi-trash text-danger"></i></button>
                     </td>
                 </tr>
                 <%
+                        }
                     }
 
                 %>
@@ -210,7 +212,18 @@
 <script src="assets/js/jquery-3.6.1.min.js"></script>
 
 <script>
-    // Edit button on action
+
+    $("#btnSaveCustomer").on("click", function () {
+        let data = $("#customerForm").serialize();
+        $.ajax({
+            url: "customer?operation=add",
+            formData: data,
+            success: function (res) {
+
+            }
+        });
+    });
+
 
     $(".customer-edits").on("click", function () {
         var id = $(this).parent().parent().parent().children(":eq(0)").text();
