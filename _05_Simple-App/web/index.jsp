@@ -215,15 +215,27 @@
 
     $("#btnSaveCustomer").on("click", function () {
         let formData = $("#customerForm").serialize();
-        console.log(formData)
-        $.ajax({
-            url: "customer?operation=add",
-            method: "post",
-            data: formData,
-            success: function (res) {
 
-            }
-        });
+        if ($(this).text() == "Save"){
+            $.ajax({
+                url: "customer?operation=add",
+                method: "post",
+                data: formData,
+                success: function (res) {
+
+                }
+            });
+        }else {
+            $.ajax({
+                url: "customer?operation=update",
+                method: "post",
+                data: formData,
+                success: function (res) {
+
+                }
+            });
+        }
+
     });
 
 
