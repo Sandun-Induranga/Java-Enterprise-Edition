@@ -263,7 +263,6 @@
         var salary = $(this).parent().parent().children(":eq(3)").text();
 
         setCustomerTextFields(id, name, address, salary);
-        $("#btnSaveCustomer").text("Update");
         $("#btnSaveCustomer").attr("formaction", "customer?operation=update");
     });
 
