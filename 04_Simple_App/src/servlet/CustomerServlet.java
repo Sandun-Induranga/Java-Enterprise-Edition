@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * @since : 0.1.0
  **/
 
-//@WebServlet(urlPatterns = "/customer")
+@WebServlet(urlPatterns = "/customer")
 public class CustomerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
