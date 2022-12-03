@@ -26,6 +26,26 @@
 
 <body class="container-fluid">
 
+<%
+    //    ArrayList<model.CustomerDTO> customerDTOS;
+
+//    Class.forName("com.mysql.jdbc.Driver");
+//    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
+//    PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer");
+//    ResultSet resultSet = pstm.executeQuery();
+//
+//    while (resultSet.next()){
+//        System.out.println("Come");
+//    }
+
+//    customerDTOS.add(new CustomerDTO("C00-001", "Dasun", "Galle", 10000));
+//    customerDTOS.add(new CustomerDTO("C00-002", "Dasun", "Galle", 10000));
+//    customerDTOS.add(new CustomerDTO("C00-003", "Dasun", "Galle", 10000));
+//    customerDTOS.add(new CustomerDTO("C00-004", "Dasun", "Galle", 10000));
+//    customerDTOS.add(new CustomerDTO("C00-005", "Dasun", "Galle", 10000));
+
+%>
+
 <main class="d-flex row align-items-center justify-content-center">
 
     <section
@@ -167,36 +187,36 @@
                 </thead>
                 <tbody id="body">
 
-<%--                <%--%>
-<%--                    //                    ArrayList<CustomerDTO> customerDTOS = new ArrayList<>();--%>
-<%--                    ArrayList<CustomerDTO> customerDTOs = (ArrayList<CustomerDTO>) request.getAttribute("customers");--%>
+                <%
+                    //                    ArrayList<CustomerDTO> customerDTOS = new ArrayList<>();
+                    ArrayList<CustomerDTO> customerDTOs = (ArrayList<CustomerDTO>) request.getAttribute("customers");
 
 
-<%--                    for (CustomerDTO customerDTO : customerDTOs) {--%>
+                    for (CustomerDTO customerDTO : customerDTOs) {
 
-<%--                %>--%>
-<%--                <tr>--%>
-<%--                    <td><%=customerDTO.getId()%>--%>
-<%--                    </td>--%>
-<%--                    <td><%=customerDTO.getName()%>--%>
-<%--                    </td>--%>
-<%--                    <td><%=customerDTO.getAddress()%>--%>
-<%--                    </td>--%>
-<%--                    <td><%=customerDTO.getSalary()%>--%>
-<%--                    </td>--%>
-<%--                    <td class="">--%>
-<%--                        <form id="buttons">--%>
-<%--                            <button type="button" class="border border-0 customer-edits"><i--%>
-<%--                                    class="bi bi-pencil-fill text-success" data-bs-toggle="modal"--%>
-<%--                                    data-bs-target="#staticBackdrop"></i></button>--%>
-<%--                        </form>--%>
-<%--                        <button class="border border-0 customer-deletes" form="customerForm" formaction="customer?operation=delete" formmethod="post"><i class="bi bi-trash text-danger"></i></button>--%>
-<%--                    </td>--%>
-<%--                </tr>--%>
-<%--                <%--%>
-<%--                    }--%>
+                %>
+                <tr>
+                    <td><%=customerDTO.getId()%>
+                    </td>
+                    <td><%=customerDTO.getName()%>
+                    </td>
+                    <td><%=customerDTO.getAddress()%>
+                    </td>
+                    <td><%=customerDTO.getSalary()%>
+                    </td>
+                    <td class="">
+                        <form id="buttons">
+                            <button type="button" class="border border-0 customer-edits"><i
+                                    class="bi bi-pencil-fill text-success" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop"></i></button>
+                        </form>
+                        <button class="border border-0 customer-deletes" form="customerForm" formaction="customer?operation=delete" formmethod="post"><i class="bi bi-trash text-danger"></i></button>
+                    </td>
+                </tr>
+                <%
+                    }
 
-<%--                %>--%>
+                %>
 
                 </tbody>
             </table>
