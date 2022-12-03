@@ -24,6 +24,7 @@ public class CustomerServlet extends HttpServlet {
         String cusId = req.getParameter("cusId");
         String cusName = req.getParameter("cusName");
         String cusAddress = req.getParameter("cusAddress");
+        System.out.println(req.getParameter("cusSalary"));
         double cusSalary = Double.parseDouble(req.getParameter("cusSalary"));
         String operation = req.getParameter("operation");
 
