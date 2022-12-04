@@ -258,7 +258,7 @@
         console.log(id)
 
         $.ajax({
-            url: "customer?cusId="+id+"&operation=delete",
+            url: "customer?cusId="+id.trim()+"&operation=delete",
             method: "post",
             success: function (res) {
 
