@@ -89,9 +89,15 @@ public class CustomerServlet extends HttpServlet {
             PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer");
             ResultSet resultSet = pstm.executeQuery();
 
+            String json = "[";
+
             while (resultSet.next()) {
                 customerDTOs.add(new CustomerDTO(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4)));
+                json += "{"+resultSet.getString(1)+","+resultSet.getString(2)+","+resultSet.getString(3)+","+resultSet.getInt(4)+"},";
             }
+
+            json += "\b]";
+            System.out.println(json);
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();

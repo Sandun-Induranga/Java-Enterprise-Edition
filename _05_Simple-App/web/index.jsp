@@ -275,9 +275,16 @@
     }
 
     $("#btnGetAll").on("click", function () {
-        $("#btnSaveCustomer").text("Update");
-        $("#btnSaveCustomer").attr("formaction", "customer?operation=add");
-    })
+
+        $.ajax({
+            url: "customer",
+            method: "get",
+            success: function (res) {
+
+            }
+        });
+
+    });
 
 </script>
 
