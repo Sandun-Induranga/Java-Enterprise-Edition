@@ -189,8 +189,7 @@
                                     class="bi bi-pencil-fill text-success" data-bs-toggle="modal"
                                     data-bs-target="#staticBackdrop"></i></button>
                         </form>
-                        <button class="border border-0 customer-deletes" form="customerForm"
-                                formaction="customer?operation=delete" formmethod="post"><i
+                        <button class="border border-0 customer-deletes"><i
                                 class="bi bi-trash text-danger"></i></button>
                     </td>
                 </tr>
@@ -250,20 +249,22 @@
 
         setCustomerTextFields(id, name, address, salary);
         $("#btnSaveCustomer").text("Update");
-        $("#btnSaveCustomer").attr("formaction", "customer?operation=update");
+
     });
 
     $(".customer-deletes").on("click", function () {
+
         var id = $(this).parent().parent().children(":eq(0)").text();
+        console.log(id)
 
-        var name = $(this).parent().parent().children(":eq(1)").text();
+        $.ajax({
+            url: "customer?cusId="+id+"&operation=delete",
+            method: "post",
+            success: function (res) {
 
-        var address = $(this).parent().parent().children(":eq(2)").text();
+            }
+        });
 
-        var salary = $(this).parent().parent().children(":eq(3)").text();
-
-        setCustomerTextFields(id, name, address, salary);
-        $("#btnSaveCustomer").attr("formaction", "customer?operation=update");
     });
 
     function setCustomerTextFields(id, name, address, salary) {

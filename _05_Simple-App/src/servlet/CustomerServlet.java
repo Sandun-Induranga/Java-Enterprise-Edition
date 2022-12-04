@@ -24,8 +24,6 @@ public class CustomerServlet extends HttpServlet {
         String cusId = req.getParameter("cusId");
         String cusName = req.getParameter("cusName");
         String cusAddress = req.getParameter("cusAddress");
-        System.out.println(req.getParameter("cusSalary"));
-        double cusSalary = Double.parseDouble(req.getParameter("cusSalary"));
         String operation = req.getParameter("operation");
 
         //Save Customer
@@ -33,9 +31,10 @@ public class CustomerServlet extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
 
-            System.out.println(operation);
             switch (operation) {
                 case "add": {
+
+                    double cusSalary = Double.parseDouble(req.getParameter("cusSalary"));
 
                     PreparedStatement pstm = connection.prepareStatement("INSERT INTO Customer VALUES (?,?,?,?)");
 
@@ -49,6 +48,8 @@ public class CustomerServlet extends HttpServlet {
                 }
                 case "update": {
 
+                    double cusSalary = Double.parseDouble(req.getParameter("cusSalary"));
+
                     PreparedStatement pstm = connection.prepareStatement("UPDATE Customer SET customerName=?, address=?, salary=? WHERE customerId=?");
 
                     pstm.setString(1, cusName);
@@ -60,7 +61,8 @@ public class CustomerServlet extends HttpServlet {
 
                 }
                 case "delete": {
-                    System.out.println(cusId+operation);
+                    System.out.println(cusId);
+
                     PreparedStatement pstm = connection.prepareStatement("DELETE FROM Customer WHERE customerId=?");
 
                     pstm.setString(1, cusId);
