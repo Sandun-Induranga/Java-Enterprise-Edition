@@ -103,8 +103,7 @@
                     </button>
 
                     <!-- Get All Button -->
-                    <button type="submit" class="btn btn-dark" id="btnGetAll" form="form1" formaction="customer"
-                            formmethod="get">
+                    <button type="submit" class="btn btn-dark" id="btnGetAll">
                         Get All
                     </button>
                 </div>
