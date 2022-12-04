@@ -93,7 +93,7 @@ public class CustomerServlet extends HttpServlet {
 
             while (resultSet.next()) {
                 customerDTOs.add(new CustomerDTO(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4)));
-                json += "{"+resultSet.getString(1)+","+resultSet.getString(2)+","+resultSet.getString(3)+","+resultSet.getInt(4)+"},";
+                json += "{\"id\":\""+resultSet.getString(1)+"\",\"name\":\""+resultSet.getString(2)+"\",\"address\":\""+resultSet.getString(3)+"\",\"salary\":"+resultSet.getInt(4)+"},";
             }
 
             json += "\b]";
