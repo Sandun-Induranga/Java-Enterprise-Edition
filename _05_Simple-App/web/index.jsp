@@ -208,25 +208,27 @@
 
 <script>
 
+    loadAllCustomers();
+
     $("#btnSaveCustomer").on("click", function () {
         let formData = $("#customerForm").serialize();
 
-        if ($(this).text() == "Save"){
+        if ($(this).text() == "Save") {
             $.ajax({
                 url: "customer?operation=add",
                 type: "post",
                 data: formData,
                 success: function (res) {
-
+                    loadAllCustomers();
                 }
             });
-        }else {
+        } else {
             $.ajax({
                 url: "customer?operation=update",
                 type: "post",
                 data: formData,
                 success: function (res) {
-
+                    loadAllCustomers();
                 }
             });
         }
@@ -238,34 +240,39 @@
     })
 
 
-    $(".customer-edits").on("click", function () {
-        var id = $(this).parent().parent().parent().children(":eq(0)").text();
+    function bindEditEvent() {
 
-        var name = $(this).parent().parent().parent().children(":eq(1)").text();
+        $(".customer-edits").on("click", function () {
+            var id = $(this).parent().parent().children(":eq(0)").text();
 
-        var address = $(this).parent().parent().parent().children(":eq(2)").text();
+            var name = $(this).parent().parent().children(":eq(1)").text();
 
-        var salary = $(this).parent().parent().parent().children(":eq(3)").text();
+            var address = $(this).parent().parent().children(":eq(2)").text();
 
-        setCustomerTextFields(id, name, address, salary);
-        $("#btnSaveCustomer").text("Update");
+            var salary = $(this).parent().parent().children(":eq(3)").text();
 
-    });
+            setCustomerTextFields(id, name, address, salary);
+            $("#btnSaveCustomer").text("Update");
 
-    $(".customer-deletes").on("click", function () {
-
-        var id = $(this).parent().parent().children(":eq(0)").text();
-        console.log(id)
-
-        $.ajax({
-            url: "customer?cusId="+id.trim()+"&operation=delete",
-            method: "post",
-            success: function (res) {
-
-            }
         });
+    }
 
-    });
+    function bindDeleteEvent() {
+        $(".customer-deletes").on("click", function () {
+
+            var id = $(this).parent().parent().children(":eq(0)").text();
+            console.log(id)
+
+            $.ajax({
+                url: "customer?cusId=" + id.trim() + "&operation=delete",
+                method: "post",
+                success: function (res) {
+                    loadAllCustomers();
+                }
+            });
+
+        });
+    }
 
     function setCustomerTextFields(id, name, address, salary) {
         $("#cusId").val(id.trim());
@@ -275,18 +282,23 @@
     }
 
     $("#btnGetAll").on("click", function () {
+        loadAllCustomers();
+    });
 
+    function loadAllCustomers() {
         $.ajax({
             url: "customer",
             type: "get",
             success: function (res) {
+                $("#body").empty();
                 for (let i = 0; i < res.length; i++) {
-                    $("#body").append(`<tr><td>`+res[i].id+`</td><td>`+res[i].name+`</td><td>`+res[i].address+`</td><td>`+res[i].salary+`</td><td><button type="button" class="border border-0 customer-edits"><i class="bi bi-pencil-fill text-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i></button><button class="border border-0 customer-deletes"><i class="bi bi-trash text-danger"></i></button></td></tr>`);
+                    $("#body").append(`<tr><td>` + res[i].id + `</td><td>` + res[i].name + `</td><td>` + res[i].address + `</td><td>` + res[i].salary + `</td><td><button type="button" class="border border-0 customer-edits"><i class="bi bi-pencil-fill text-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i></button><button class="border border-0 customer-deletes"><i class="bi bi-trash text-danger"></i></button></td></tr>`);
                 }
+                bindEditEvent();
+                bindDeleteEvent();
             }
         });
-
-    });
+    }
 
 </script>
 
