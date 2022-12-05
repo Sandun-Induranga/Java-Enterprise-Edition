@@ -184,12 +184,9 @@
                     </td>
                     <td class="">
                         <form id="buttons">
-                            <button type="button" class="border border-0 customer-edits"><i
-                                    class="bi bi-pencil-fill text-success" data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdrop"></i></button>
+
                         </form>
-                        <button class="border border-0 customer-deletes"><i
-                                class="bi bi-trash text-danger"></i></button>
+
                     </td>
                 </tr>
                 <%
@@ -284,8 +281,7 @@
             type: "get",
             success: function (res) {
                 for (let i = 0; i < res.length; i++) {
-                    console.log(i)
-                    $("#body").append(`<tr><td>`+res[i].id+`</td><td>`+res[i].name+`</td><td>`+res[i].address+`</td><td>`+res[i].salary+`</td></tr>`);
+                    $("#body").append(`<tr><td>`+res[i].id+`</td><td>`+res[i].name+`</td><td>`+res[i].address+`</td><td>`+res[i].salary+`</td><td><button type="button" class="border border-0 customer-edits"><i class="bi bi-pencil-fill text-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i></button><button class="border border-0 customer-deletes"><i class="bi bi-trash text-danger"></i></button></td></tr>`);
                 }
             }
         });
