@@ -98,7 +98,7 @@
                     </form>
                     <!-- Add Customers Button -->
                     <button type="button" class="btn btn-dark me-2" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop">
+                            data-bs-target="#staticBackdrop" id="btnAddCustomer">
                         Add New Customer
                     </button>
 
@@ -144,7 +144,7 @@
 
                     <div class="modal-footer">
                         <button name="" type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" id="btnSaveCustomer">Save
+                        <button type="button" class="btn btn-success" id="btnSaveCustomer">Save
                         </button>
                     </div>
                 </div>
@@ -217,7 +217,7 @@
         if ($(this).text() == "Save"){
             $.ajax({
                 url: "customer?operation=add",
-                method: "post",
+                type: "post",
                 data: formData,
                 success: function (res) {
 
@@ -226,7 +226,7 @@
         }else {
             $.ajax({
                 url: "customer?operation=update",
-                method: "post",
+                type: "post",
                 data: formData,
                 success: function (res) {
 
@@ -235,6 +235,10 @@
         }
 
     });
+
+    $("#btnAddCustomer").on("click", function () {
+        $("#btnSaveCustomer").text("Save");
+    })
 
 
     $(".customer-edits").on("click", function () {
@@ -251,20 +255,20 @@
 
     });
 
-    $(".customer-deletes").on("click", function () {
-
-        var id = $(this).parent().parent().children(":eq(0)").text();
-        console.log(id)
-
-        $.ajax({
-            url: "customer?cusId="+id.trim()+"&operation=delete",
-            method: "post",
-            success: function (res) {
-
-            }
-        });
-
-    });
+    // $(".customer-deletes").on("click", function () {
+    //
+    //     var id = $(this).parent().parent().children(":eq(0)").text();
+    //     console.log(id)
+    //
+    //     $.ajax({
+    //         url: "customer?cusId="+id.trim()+"&operation=delete",
+    //         method: "post",
+    //         success: function (res) {
+    //
+    //         }
+    //     });
+    //
+    // });
 
     function setCustomerTextFields(id, name, address, salary) {
         $("#cusId").val(id.trim());
@@ -277,7 +281,7 @@
 
         $.ajax({
             url: "customer",
-            method: "get",
+            type: "get",
             success: function (res) {
 
             }

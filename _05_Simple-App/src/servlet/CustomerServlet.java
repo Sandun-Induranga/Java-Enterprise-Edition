@@ -25,6 +25,7 @@ public class CustomerServlet extends HttpServlet {
         String cusName = req.getParameter("cusName");
         String cusAddress = req.getParameter("cusAddress");
         String operation = req.getParameter("operation");
+        System.out.println("come");
 
         //Save Customer
         try {
