@@ -28,7 +28,6 @@ public class CustomerServlet extends HttpServlet {
         String operation = req.getParameter("operation");
         System.out.println("come");
 
-        //Save Customer
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
@@ -84,22 +83,21 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ArrayList<CustomerDTO> customerDTOs = new ArrayList<>();
 
         String json = "[";
 
         try {
+
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
             PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer");
             ResultSet resultSet = pstm.executeQuery();
 
             while (resultSet.next()) {
-                customerDTOs.add(new CustomerDTO(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4)));
+
                 json += "{\"id\":\""+resultSet.getString(1)+"\",\"name\":\""+resultSet.getString(2)+"\",\"address\":\""+resultSet.getString(3)+"\",\"salary\":"+resultSet.getInt(4)+"},";
+
             }
-
-
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -107,14 +105,9 @@ public class CustomerServlet extends HttpServlet {
 
         String jsonArray = json.substring(0,json.length()-1);
         jsonArray += "]";
-        System.out.println(jsonArray);
 
         resp.addHeader("Content-Type","application/json");
         resp.getWriter().write(jsonArray);
-
-//        req.setAttribute("customers", customerDTOs); // Can add key value for a req object
-//
-//        req.getRequestDispatcher("index.jsp").forward(req,resp);
 
     }
 }

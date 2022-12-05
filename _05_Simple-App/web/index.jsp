@@ -144,7 +144,7 @@
 
                     <div class="modal-footer">
                         <button name="" type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success" id="btnSaveCustomer">Save
+                        <button type="button" class="btn btn-success" id="btnSaveCustomer" data-bs-dismiss="modal">Save
                         </button>
                     </div>
                 </div>
@@ -164,36 +164,6 @@
                 </tr>
                 </thead>
                 <tbody id="body">
-
-                <%
-                    //                    ArrayList<CustomerDTO> customerDTOS = new ArrayList<>();
-                    ArrayList<CustomerDTO> customerDTOs = (ArrayList<CustomerDTO>) request.getAttribute("customers");
-
-                    if (customerDTOs != null) {
-                        for (CustomerDTO customerDTO : customerDTOs) {
-
-                %>
-                <tr>
-                    <td><%=customerDTO.getId()%>
-                    </td>
-                    <td><%=customerDTO.getName()%>
-                    </td>
-                    <td><%=customerDTO.getAddress()%>
-                    </td>
-                    <td><%=customerDTO.getSalary()%>
-                    </td>
-                    <td class="">
-                        <form id="buttons">
-
-                        </form>
-
-                    </td>
-                </tr>
-                <%
-                        }
-                    }
-
-                %>
 
                 </tbody>
             </table>
