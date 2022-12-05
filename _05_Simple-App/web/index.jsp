@@ -255,20 +255,20 @@
 
     });
 
-    // $(".customer-deletes").on("click", function () {
-    //
-    //     var id = $(this).parent().parent().children(":eq(0)").text();
-    //     console.log(id)
-    //
-    //     $.ajax({
-    //         url: "customer?cusId="+id.trim()+"&operation=delete",
-    //         method: "post",
-    //         success: function (res) {
-    //
-    //         }
-    //     });
-    //
-    // });
+    $(".customer-deletes").on("click", function () {
+
+        var id = $(this).parent().parent().children(":eq(0)").text();
+        console.log(id)
+
+        $.ajax({
+            url: "customer?cusId="+id.trim()+"&operation=delete",
+            method: "post",
+            success: function (res) {
+
+            }
+        });
+
+    });
 
     function setCustomerTextFields(id, name, address, salary) {
         $("#cusId").val(id.trim());
@@ -284,7 +284,8 @@
             type: "get",
             success: function (res) {
                 for (let i = 0; i < res.length; i++) {
-                    console.log(`<tr><td>${res[i].code}</td><td>${res[i].name}</td><td>${res[i].qty}</td><td>${res[i].unitPrice}</td></tr>`);
+                    console.log(i)
+                    $("#body").append(`<tr><td>`+res[i].id+`</td><td>`+res[i].name+`</td><td>`+res[i].address+`</td><td>`+res[i].salary+`</td></tr>`);
                 }
             }
         });
