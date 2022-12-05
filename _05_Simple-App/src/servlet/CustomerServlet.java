@@ -1,5 +1,6 @@
 package servlet;
 
+import com.mysql.cj.xdevapi.JsonArray;
 import model.CustomerDTO;
 
 import javax.servlet.ServletException;
@@ -85,7 +86,7 @@ public class CustomerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ArrayList<CustomerDTO> customerDTOs = new ArrayList<>();
 
-        String json = "[";
+        String jsonArray = "";
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -93,19 +94,23 @@ public class CustomerServlet extends HttpServlet {
             PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer");
             ResultSet resultSet = pstm.executeQuery();
 
+            String json = "[";
+
             while (resultSet.next()) {
                 customerDTOs.add(new CustomerDTO(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4)));
                 json += "{\"id\":\""+resultSet.getString(1)+"\",\"name\":\""+resultSet.getString(2)+"\",\"address\":\""+resultSet.getString(3)+"\",\"salary\":"+resultSet.getInt(4)+"},";
             }
 
-            json += "\b]";
+            jsonArray = json.substring(0,json.length()-1);
+            jsonArray += "]";
             System.out.println(json);
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        resp.getWriter().write(json);
+        resp.addHeader("Content-Type","application/json");
+        resp.getWriter().write(jsonArray);
 
 //        req.setAttribute("customers", customerDTOs); // Can add key value for a req object
 //

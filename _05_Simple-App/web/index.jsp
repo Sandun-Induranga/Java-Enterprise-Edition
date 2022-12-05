@@ -283,10 +283,9 @@
             url: "customer",
             type: "get",
             success: function (res) {
-                <%--for (let customer of res) {--%>
-                <%--    &lt;%&ndash;let row = `<tr><td>${customer.cusId}</td><td>${customer.cusName}</td><td>${customer.cusAddress}</td><td>${customer.cusSalary}</td><td><i class="bi bi-pencil-fill text-success me-4 customer-edits" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i><i class="bi bi-trash text-danger customer-deletes"></i></td></tr>`;&ndash;%&gt;--%>
-                <%--}--%>
-                console.log(res)
+                for (let i = 0; i < res.length; i++) {
+                    console.log(`<tr><td>${res[i].code}</td><td>${res[i].name}</td><td>${res[i].qty}</td><td>${res[i].unitPrice}</td></tr>`);
+                }
             }
         });
 
