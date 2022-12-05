@@ -144,7 +144,7 @@
 
                     <div class="modal-footer">
                         <button name="" type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success" form="customerForm" data-bs-dismiss="modal" id="btnSaveCustomer">Save
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" id="btnSaveCustomer">Save
                         </button>
                     </div>
                 </div>
