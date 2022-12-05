@@ -84,13 +84,14 @@ public class CustomerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ArrayList<CustomerDTO> customerDTOs = new ArrayList<>();
+
+        String json = "[";
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
             PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer");
             ResultSet resultSet = pstm.executeQuery();
-
-            String json = "[";
 
             while (resultSet.next()) {
                 customerDTOs.add(new CustomerDTO(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4)));
@@ -104,9 +105,11 @@ public class CustomerServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        req.setAttribute("customers", customerDTOs); // Can add key value for a req object
+        resp.getWriter().write(json);
 
-        req.getRequestDispatcher("index.jsp").forward(req,resp);
+//        req.setAttribute("customers", customerDTOs); // Can add key value for a req object
+//
+//        req.getRequestDispatcher("index.jsp").forward(req,resp);
 
     }
 }
