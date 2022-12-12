@@ -10,6 +10,8 @@
           <element id="file-copy" path="$APPLICATION_CONFIG_DIR$/.m2/repository/org/projectlombok/lombok/1.18.22/lombok-1.18.22.jar" />
           <element id="library" level="project" name="mysql-connector-java-8.0.28" />
           <element id="library" level="project" name="mysql-connector-java-8.0.28 (2)" />
+          <element id="library" level="project" name="javax.json-1.1.4" />
+          <element id="library" level="project" name="javax.json-api-1.1.4" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="_05_Simple-App/web/Web" />

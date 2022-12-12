@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/04_Simple_App/04_Simple_App.iml" filepath="$PROJECT_DIR$/04_Simple_App/04_Simple_App.iml" />
       <module fileurl="file://$PROJECT_DIR$/AJAX.iml" filepath="$PROJECT_DIR$/AJAX.iml" />
       <module fileurl="file://$PROJECT_DIR$/Mapping-Specifications/Mapping-Specifications.iml" filepath="$PROJECT_DIR$/Mapping-Specifications/Mapping-Specifications.iml" />
+      <module fileurl="file://$PROJECT_DIR$/POS_FrontEnd.iml" filepath="$PROJECT_DIR$/POS_FrontEnd.iml" />
       <module fileurl="file://$PROJECT_DIR$/_05_Simple-App/_05_Simple-App.iml" filepath="$PROJECT_DIR$/_05_Simple-App/_05_Simple-App.iml" />
     </modules>
   </component>

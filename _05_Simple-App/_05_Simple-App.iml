@@ -31,5 +31,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="mysql-connector-java-8.0.28 (2)" level="project" />
+    <orderEntry type="library" name="javax.json-1.1.4" level="project" />
+    <orderEntry type="library" name="javax.json-api-1.1.4" level="project" />
   </component>
 </module>
