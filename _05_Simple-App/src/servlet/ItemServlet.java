@@ -223,21 +223,22 @@ public class ItemServlet extends HttpServlet {
 
         JsonObject item = reader.readObject();
 
-        String code = item.getString("id");
-        String name = item.getString("name");
-        String qty = item.getString("address");
-        String price = item.getString("cusSalary");
+        String code = item.getString("code");
+        String name = item.getString("itemName");
+        System.out.println(item.getInt("qtyOnHand"));
+        int qty = item.getInt("qtyOnHand");
+        String price = item.getString("price");
 
         try {
 
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
-            PreparedStatement pstm = connection.prepareStatement("UPDATE Customer SET customerName=?, address=?, salary=? WHERE customerId=?");
+            PreparedStatement pstm = connection.prepareStatement("UPDATE Item SET name=?, qty=?, price=? WHERE code=?");
 
-            pstm.setString(1, code);
-            pstm.setString(2, name);
-            pstm.setString(3, qty);
-            pstm.setString(4, price);
+            pstm.setString(1, name);
+            pstm.setInt(2, qty);
+            pstm.setString(3, price);
+            pstm.setString(4, code);
             boolean b = pstm.executeUpdate() > 0;
             if (b) {
                 JsonObjectBuilder obj = Json.createObjectBuilder();

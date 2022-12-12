@@ -187,10 +187,10 @@
         let formData = $("#itemForm").serialize();
 
         let json = {
-            id: $("#code").val(),
-            name: $("#itemName").val(),
-            address: $("#qtyOnHand").val(),
-            cusSalary: $("#price").val()
+            code: $("#code").val(),
+            itemName: $("#itemName").val(),
+            qtyOnHand: parseInt($("#qtyOnHand").val()),
+            price: $("#price").val()
         };
 
         if ($(this).text() == "Save") {
