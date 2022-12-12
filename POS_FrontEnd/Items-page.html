@@ -95,7 +95,8 @@
 
 
                     <!-- Add Items Button -->
-                    <button type="button" class="btn btn-dark me-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="btnAddItem">
+                    <button type="button" class="btn btn-dark me-2" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop" id="btnAddItem">
                         Add New Item
                     </button>
 
@@ -120,19 +121,19 @@
                                     <form class="w-75" id="itemForm">
                                         <div class="mb-3">
                                             <label for="code" class="form-label">Item Code</label>
-                                            <input type="text" class="form-control" id="code">
+                                            <input type="text" class="form-control" id="code" name="code">
                                         </div>
                                         <div class="mb-3">
                                             <label for="itemName" class="form-label">Item Name</label>
-                                            <input type="text" class="form-control" id="itemName">
+                                            <input type="text" class="form-control" id="itemName" name="itemName">
                                         </div>
                                         <div class="mb-3">
                                             <label for="price" class="form-label">Price</label>
-                                            <input type="text" class="form-control" id="price">
+                                            <input type="text" class="form-control" id="price" name="price">
                                         </div>
                                         <div class="mb-3">
                                             <label for="qtyOnHand" class="form-label">Quantity On Hand</label>
-                                            <input type="text" class="form-control" id="qtyOnHand">
+                                            <input type="text" class="form-control" id="qtyOnHand" name="qtyOnHand">
                                         </div>
                                     </form>
                                 </div>
@@ -192,9 +193,6 @@
             cusSalary: $("#price").val()
         };
 
-        let customer = JSON.stringify(json);  // Method to convert javascript object to json object
-
-
         if ($(this).text() == "Save") {
             $.ajax({
                 url: baseUrl + "item",
@@ -231,8 +229,8 @@
     });
 
     $("#btnAddItem").on("click", function () {
-        $("#btnAddItem").text("Save");
-    })
+        $("#btnSave").text("Save");
+    });
 
 
     function bindEditEvent() {
