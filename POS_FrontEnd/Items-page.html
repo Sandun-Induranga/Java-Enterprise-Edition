@@ -200,7 +200,7 @@
                 data: formData,
                 dataType: "json",
                 success: function (res) {
-                    loadAllCustomers();
+                    loadAllItems();
                     alert(res.message);
                 },
                 error: function (error) {  // When status code equals to 500 then, this method has been invoked
@@ -236,16 +236,16 @@
     function bindEditEvent() {
 
         $(".customer-edits").on("click", function () {
-            var id = $(this).parent().parent().children(":eq(0)").text();
+            var code = $(this).parent().parent().children(":eq(0)").text();
 
             var name = $(this).parent().parent().children(":eq(1)").text();
 
-            var address = $(this).parent().parent().children(":eq(2)").text();
+            var qty = $(this).parent().parent().children(":eq(2)").text();
 
-            var salary = $(this).parent().parent().children(":eq(3)").text();
+            var price = $(this).parent().parent().children(":eq(3)").text();
 
-            setCustomerTextFields(id, name, address, salary);
-            $("#btnSaveCustomer").text("Update");
+            setItemTextFields(code, name, qty, price);
+            $("#btnSave").text("Update");
 
         });
     }
@@ -273,11 +273,11 @@
         });
     }
 
-    function setCustomerTextFields(id, name, address, salary) {
-        $("#cusId").val(id.trim());
-        $("#cusName").val(name.trim());
-        $("#cusAddress").val(address.trim());
-        $("#cusSalary").val(salary.trim());
+    function setItemTextFields(code, name, qty, price) {
+        $("#code").val(code.trim());
+        $("#itemName").val(name.trim());
+        $("#qtyOnHand").val(qty.trim());
+        $("#price").val(price.trim());
     }
 
     $("#btnGetAll").on("click", function () {

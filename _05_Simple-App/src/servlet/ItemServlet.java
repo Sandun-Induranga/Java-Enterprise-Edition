@@ -53,47 +53,6 @@ public class ItemServlet extends HttpServlet {
 
             }
 
-//            switch (operation) {
-//                case "add": {
-//
-//                    double cusSalary = Double.parseDouble(req.getParameter("cusSalary"));
-//
-//                    PreparedStatement pstm = connection.prepareStatement("INSERT INTO Customer VALUES (?,?,?,?)");
-//
-//                    pstm.setString(1, cusId);
-//                    pstm.setString(2, cusName);
-//                    pstm.setString(3, cusAddress);
-//                    pstm.setDouble(4, cusSalary);
-//                    pstm.executeUpdate();
-//                    break;
-//
-//                }
-//                case "update": {
-//
-//                    double cusSalary = Double.parseDouble(req.getParameter("cusSalary"));
-//
-//                    PreparedStatement pstm = connection.prepareStatement("UPDATE Customer SET customerName=?, address=?, salary=? WHERE customerId=?");
-//
-//                    pstm.setString(1, cusName);
-//                    pstm.setString(2, cusAddress);
-//                    pstm.setDouble(3, cusSalary);
-//                    pstm.setString(4, cusId);
-//                    pstm.executeUpdate();
-//                    break;
-//
-//                }
-//                case "delete": {
-//                    System.out.println(cusId);
-//
-//                    PreparedStatement pstm = connection.prepareStatement("DELETE FROM Customer WHERE customerId=?");
-//
-//                    pstm.setString(1, cusId);
-//                    pstm.executeUpdate();
-//                    break;
-//
-//                }
-//            }
-
         } catch (ClassNotFoundException e) {
 
             JsonObjectBuilder obj = Json.createObjectBuilder();
