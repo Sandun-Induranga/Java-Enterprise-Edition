@@ -31,23 +31,39 @@ public class PurchaseOrderServlet extends HttpServlet {
             pstm.setString(1, cusId);
             ResultSet resultSet = pstm.executeQuery();
 
-            if (resultSet.next()){
+            if (resultSet.next()) {
                 JsonObjectBuilder obj = Json.createObjectBuilder();
-                obj.add("cusId",resultSet.getString(1));
-                obj.add("cusName",resultSet.getString(2));
-                obj.add("cusAddress",resultSet.getString(3));
-                obj.add("cusSalary",resultSet.getString(4));
+                obj.add("cusId", resultSet.getString(1));
+                obj.add("cusName", resultSet.getString(2));
+                obj.add("cusAddress", resultSet.getString(3));
+                obj.add("cusSalary", resultSet.getString(4));
 
                 obj.add("state", "OK");
                 obj.add("message", "Successfully Loaded..!");
                 obj.add("data", obj.build());
                 resp.setStatus(200);
+            } else {
+                throw new SQLException("No Such Customer ID");
             }
 
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            JsonObjectBuilder obj = Json.createObjectBuilder();
+
+            obj.add("state", "Error");
+            obj.add("message", e.getLocalizedMessage());
+            obj.add("data", "");
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+
+            resp.getWriter().print(obj.build());
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            JsonObjectBuilder obj = Json.createObjectBuilder();
+
+            obj.add("state", "Error");
+            obj.add("message", e.getLocalizedMessage());
+            obj.add("data", "");
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+
+            resp.getWriter().print(obj.build());
         }
 
     }
