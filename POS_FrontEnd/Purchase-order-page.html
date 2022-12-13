@@ -228,11 +228,13 @@
 
 <script>
 
+    const baseUrl = "http://localhost:8080/App_05/";
+
     loadAllCustomerIdsInPurchaseOrder();
 
     function loadAllCustomerIdsInPurchaseOrder() {
         $.ajax({
-            url: "customer",
+            url: baseUrl + "customer",
             type: "get",
             dataType: "json",
             success: function (res) {
@@ -240,7 +242,7 @@
                 $("#cmbCustomerId").append(`<option disabled selected hidden>Customer ID</option>`);
 
                 for (let customer of res.data) {
-                    $("#cmbCustomerId").append(`<option>${customer.cusId}</option>`);
+                    $("#cmbCustomerId").append(`<option>${customer.id}</option>`);
                 }
 
                 alert(res.message);

@@ -187,9 +187,6 @@
             cusSalary: $("#cusSalary").val()
         };
 
-        let customer = JSON.stringify(json);  // Method to convert javascript object to json object
-
-
         if ($(this).text() == "Save") {
             $.ajax({
                 url: baseUrl + "customer",
