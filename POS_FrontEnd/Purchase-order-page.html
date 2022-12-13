@@ -283,14 +283,14 @@
 
     $("#cmbCustomerId").change(function () {
         $.ajax({
-            url: baseUrl + "order?cusId" + $("#cmbCustomerId").val(),
+            url: baseUrl + "order?cusId=" + $("#cmbCustomerId").val(),
             type: "get",
             dataType: "json",
             success: function (res) {
 
-                $("#cusName").val(res.cusName);
-                $("#cusAddress").val(res.cusAddress);
-                $("#cusSalary").val(res.cusSalary);
+                $("#cusName").val(res.data.cusName);
+                $("#cusAddress").val(res.data.cusAddress);
+                $("#cusSalary").val(res.data.cusSalary);
 
                 alert(res.message);
                 bindEditEvent();

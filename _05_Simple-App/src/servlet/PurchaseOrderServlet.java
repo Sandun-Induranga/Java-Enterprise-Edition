@@ -42,6 +42,9 @@ public class PurchaseOrderServlet extends HttpServlet {
                 obj.add("message", "Successfully Loaded..!");
                 obj.add("data", obj.build());
                 resp.setStatus(200);
+
+                resp.getWriter().print(obj.build());
+
             } else {
                 throw new SQLException("No Such Customer ID");
             }
@@ -65,6 +68,9 @@ public class PurchaseOrderServlet extends HttpServlet {
 
             resp.getWriter().print(obj.build());
         }
+
+        resp.addHeader("Content-Type", "application/json");
+        resp.addHeader("Access-Control-Allow-Origin", "*");
 
     }
 }
