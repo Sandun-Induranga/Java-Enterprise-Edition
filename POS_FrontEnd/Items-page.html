@@ -253,15 +253,15 @@
     function bindDeleteEvent() {
         $(".customer-deletes").on("click", function () {
 
-            var id = $(this).parent().parent().children(":eq(0)").text();
-            console.log(id)
+            var code = $(this).parent().parent().children(":eq(0)").text();
+            console.log(code)
 
             $.ajax({
-                url: baseUrl + "customer?cusId=" + id.trim(),
+                url: baseUrl + "item?code=" + code.trim(),
                 method: "delete",
                 dataType: "json",
                 success: function (res) {
-                    loadAllCustomers();
+                    loadAllItems();
                     alert(res.message);
                 },
                 error: function (error) {  // When status code equals to 500 then, this method has been invoked

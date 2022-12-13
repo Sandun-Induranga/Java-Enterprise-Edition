@@ -191,7 +191,7 @@ public class ItemServlet extends HttpServlet {
                 resp.getWriter().print(obj.build());
 
             } else {
-                throw new SQLException("No Such Customer ID");
+                throw new SQLException("No Such Item Code");
             }
 
         } catch (ClassNotFoundException e) {
