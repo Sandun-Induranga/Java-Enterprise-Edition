@@ -231,6 +231,7 @@
     const baseUrl = "http://localhost:8080/App_05/";
 
     loadAllCustomerIdsInPurchaseOrder();
+    loadAllItemCodesInPurchaseOrder();
 
     function loadAllCustomerIdsInPurchaseOrder() {
         $.ajax({
@@ -243,6 +244,30 @@
 
                 for (let customer of res.data) {
                     $("#cmbCustomerId").append(`<option>${customer.id}</option>`);
+                }
+
+                alert(res.message);
+                bindEditEvent();
+                bindDeleteEvent();
+            },
+            error: function (error) {
+                let parse = JSON.parse(error.responseText);
+                alert(parse.message);
+            }
+        });
+    }
+
+    function loadAllItemCodesInPurchaseOrder() {
+        $.ajax({
+            url: baseUrl + "item",
+            type: "get",
+            dataType: "json",
+            success: function (res) {
+                $("#cmbItemCode").empty();
+                $("#cmbItemCode").append(`<option disabled selected hidden>Item Code</option>`);
+
+                for (let item of res.data) {
+                    $("#cmbItemCode").append(`<option>${item.code}</option>`);
                 }
 
                 alert(res.message);
