@@ -287,8 +287,8 @@
             type: "get",
             dataType: "json",
             success: function (res) {
-                $("#body").empty();
 
+                $("#body").empty();
                 for (let customer of res.data) {
 
                     $("#body").append(`<tr><td>` + customer.id + `</td><td>` + customer.name + `</td><td>` + customer.address + `</td><td>` + customer.salary + `</td><td><button type="button" class="border border-0 customer-edits"><i class="bi bi-pencil-fill text-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i></button><button class="border border-0 customer-deletes"><i class="bi bi-trash text-danger"></i></button></td></tr>`);
@@ -296,6 +296,7 @@
                 alert(res.message);
                 bindEditEvent();
                 bindDeleteEvent();
+
             },
             error: function (error) {  // When status code equals to 500 then, this method has been invoked
                 let parse = JSON.parse(error.responseText);
