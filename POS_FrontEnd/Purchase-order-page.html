@@ -388,6 +388,14 @@
         setTotal();
     }
 
+    function setTotal() {
+        let total = 0;
+        for (let cartItem of cartDB) {
+            total += parseFloat(cartItem.total);
+        }
+        $("#total").text(total + " /=");
+    }
+
     function bindPurchaseEditEvent() {
         $(".purchase-order-edits").on("click", function () {
             var code = $(this).parent().parent().children(":eq(0)").text();
