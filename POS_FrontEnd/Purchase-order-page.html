@@ -281,6 +281,28 @@
         });
     }
 
+    $("#cmbCustomerId").change(function () {
+        $.ajax({
+            url: baseUrl + "order?cusId" + $("#cmbCustomerId").val(),
+            type: "get",
+            dataType: "json",
+            success: function (res) {
+
+                $("#cusName").val(res.cusName);
+                $("#cusAddress").val(res.cusAddress);
+                $("#cusSalary").val(res.cusSalary);
+
+                alert(res.message);
+                bindEditEvent();
+                bindDeleteEvent();
+            },
+            error: function (error) {
+                let parse = JSON.parse(error.responseText);
+                alert(parse.message);
+            }
+        });
+    });
+
 </script>
 
 </body>
