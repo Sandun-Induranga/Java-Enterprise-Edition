@@ -303,6 +303,34 @@
         });
     });
 
+    $("#cmbItemCode").change(function () {
+        $.ajax({
+            url: baseUrl + "order?code=" + $("#cmbItemCode").val(),
+            type: "get",
+            dataType: "json",
+            success: function (res) {
+
+                // var item = searchItem($(this).val());
+                // var cartItem = searchCartItem($(this).val());
+                // $("#item_name").val(item.itemName);
+                // $("#unitPrice").val(item.unitPrice);
+                // if (cartItem != null) {
+                //     $("#qty_OnHand").val(parseInt(item.qty) - parseInt(cartItem.qty));
+                // } else {
+                //     $("#qty_OnHand").val(item.qty);
+                // }
+
+                alert(res.message);
+                bindEditEvent();
+                bindDeleteEvent();
+            },
+            error: function (error) {
+                let parse = JSON.parse(error.responseText);
+                alert(parse.message);
+            }
+        });
+    });
+
 </script>
 
 </body>
