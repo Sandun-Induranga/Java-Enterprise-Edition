@@ -221,12 +221,31 @@
 
 <script>
 
-    $("#btnAddToCart").click(function () {
-        let cusId = $("#cusId").val();
-        let cusName = $("#cusName").val();
-        let address = $("#address").val();
-        let salary = $("#salary").val();
-    });
+    loadAllCustomerIdsInPurchaseOrder();
+
+    function loadAllCustomerIdsInPurchaseOrder() {
+        $.ajax({
+            url: "customer",
+            type: "get",
+            dataType: "json",
+            success: function (res) {
+                $("#cmbCustomerId").empty();
+                $("#cmbCustomerId").append(`<option disabled selected hidden>Customer ID</option>`);
+
+                for (let customer of res.data) {
+                    $("#cmbCustomerId").append(`<option>${customer.cusId}</option>`);
+                }
+
+                alert(res.message);
+                bindEditEvent();
+                bindDeleteEvent();
+            },
+            error: function (error) {  // When status code equals to 500 then, this method has been invoked
+                let parse = JSON.parse(error.responseText);
+                alert(parse.message);
+            }
+        });
+    }
 
 </script>
 
