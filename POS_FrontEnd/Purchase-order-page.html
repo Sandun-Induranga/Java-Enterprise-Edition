@@ -284,7 +284,7 @@
 
     $("#cmbCustomerId").change(function () {
         $.ajax({
-            url: baseUrl + "order?cusId=" + $("#cmbCustomerId").val(),
+            url: baseUrl + "order?option=customer&cusId=" + $("#cmbCustomerId").val(),
             type: "get",
             dataType: "json",
             success: function (res) {
@@ -306,7 +306,7 @@
 
     $("#cmbItemCode").change(function () {
         $.ajax({
-            url: baseUrl + "order?code=" + $("#cmbItemCode").val(),
+            url: baseUrl + "order?option=item&code=" + $("#cmbItemCode").val(),
             type: "get",
             dataType: "json",
             success: function (res) {
@@ -330,6 +330,11 @@
                 alert(parse.message);
             }
         });
+    });
+
+    $("#btnAddToCart").on("click", function () {
+        addToCart();
+        $(this).attr("disabled", true);
     });
 
     function addToCart() {
