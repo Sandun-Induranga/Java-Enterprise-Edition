@@ -21,32 +21,38 @@ import java.sql.*;
 public class PurchaseOrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String option = req.getParameter("option");
         String cusId = req.getParameter("cusId");
 
         try {
 
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
-            PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer WHERE customerId=?");
-            pstm.setString(1, cusId);
-            ResultSet resultSet = pstm.executeQuery();
 
-            if (resultSet.next()) {
-                JsonObjectBuilder obj = Json.createObjectBuilder();
-                obj.add("cusId", resultSet.getString(1));
-                obj.add("cusName", resultSet.getString(2));
-                obj.add("cusAddress", resultSet.getString(3));
-                obj.add("cusSalary", resultSet.getString(4));
+            switch (option) {
+                case "customer":
+                    PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer WHERE customerId=?");
+                    pstm.setString(1, cusId);
+                    ResultSet resultSet = pstm.executeQuery();
 
-                obj.add("state", "OK");
-                obj.add("message", "Successfully Loaded..!");
-                obj.add("data", obj.build());
-                resp.setStatus(200);
+                    if (resultSet.next()) {
+                        JsonObjectBuilder obj = Json.createObjectBuilder();
+                        obj.add("cusId", resultSet.getString(1));
+                        obj.add("cusName", resultSet.getString(2));
+                        obj.add("cusAddress", resultSet.getString(3));
+                        obj.add("cusSalary", resultSet.getString(4));
 
-                resp.getWriter().print(obj.build());
+                        obj.add("state", "OK");
+                        obj.add("message", "Successfully Loaded..!");
+                        obj.add("data", obj.build());
+                        resp.setStatus(200);
 
-            } else {
-                throw new SQLException("No Such Customer ID");
+                        resp.getWriter().print(obj.build());
+
+                    } else {
+                        throw new SQLException("No Such Customer ID");
+                    }
+                    break;
             }
 
         } catch (ClassNotFoundException e) {
