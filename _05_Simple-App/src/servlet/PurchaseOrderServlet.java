@@ -115,9 +115,7 @@ public class PurchaseOrderServlet extends HttpServlet {
         JsonArray items = details.getJsonArray("items");
         String total = details.getString("total");
 
-        System.out.println(details);
-        System.out.println(customer);
-        System.out.println(items);
+        boolean b = false;
 
         try {
 
@@ -150,15 +148,46 @@ public class PurchaseOrderServlet extends HttpServlet {
                 pstm.setInt(1, Integer.parseInt(jsonObject.getString("qty")));
                 pstm.setString(2, jsonObject.getString("code"));
 
-                pstm.executeUpdate();
+                b = pstm.executeUpdate() > 0;
 
             }
 
+            if (b) {
+
+                JsonObjectBuilder obj = Json.createObjectBuilder();
+
+                obj.add("state", "OK");
+                obj.add("message", "Order Placed");
+                obj.add("data", "");
+                resp.setStatus(200);
+
+                resp.getWriter().print(obj.build());
+
+            }
+
+
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+
+            JsonObjectBuilder obj = Json.createObjectBuilder();
+
+            obj.add("state", "Error");
+            obj.add("message", e.getLocalizedMessage());
+            obj.add("data", "");
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 // Server Side Errors
+
+            resp.getWriter().print(obj.build());
+
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            JsonObjectBuilder obj = Json.createObjectBuilder();
+
+            obj.add("state", "Error");
+            obj.add("message", e.getLocalizedMessage());
+            obj.add("data", "");
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);  // 400 // Client Side Errors
+
+            resp.getWriter().print(obj.build());
         }
+        resp.addHeader("Access-Control-Allow-Origin", "*");
 
     }
 

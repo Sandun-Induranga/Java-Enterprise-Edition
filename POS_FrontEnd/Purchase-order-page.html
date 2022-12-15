@@ -162,8 +162,7 @@
 
             <!-- Place Order Button -->
             <div>
-                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                        id="btnPlaceOrder">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" id="btnPlaceOrder">
                     Place Order <i class="bi bi-shop"></i>
                 </button>
             </div>
@@ -448,11 +447,15 @@
 
         $.ajax({
             url: baseUrl + "order",
-            type: "post",
+            method: "post",
             data: JSON.stringify(json),
             dataType: "json",
-            success: function () {
-
+            success: function (res) {
+                alert(res.message);
+            },
+            error: function (error) {
+                let parse = JSON.parse(error.responseText);
+                alert(parse.message);
             }
         });
     });
