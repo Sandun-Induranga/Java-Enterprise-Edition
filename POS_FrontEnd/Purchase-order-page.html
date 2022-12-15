@@ -162,7 +162,8 @@
 
             <!-- Place Order Button -->
             <div>
-                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="btnPlaceOrder">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                        id="btnPlaceOrder">
                     Place Order <i class="bi bi-shop"></i>
                 </button>
             </div>
@@ -439,6 +440,21 @@
     });
 
     $("#btnPlaceOrder").on("click", function () {
+
+        let cusId = $("#cmbCustomerId").val();
+        let cusName = $("#cusName").val();
+        let cusAddress = $("#cusAddress").val();
+        let cusSalary = $("#cusSalary").val();
+
+        let details = [
+            {
+                cusId: cusId,
+                cusName: cusName,
+                cusAddress: cusAddress,
+                cusSalary: cusSalary
+            }, cartDB
+        ]
+
         $.ajax({
 
         });
