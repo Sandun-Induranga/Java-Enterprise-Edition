@@ -395,7 +395,7 @@
         for (let cartItem of cartDB) {
             total += parseFloat(cartItem.total);
         }
-        $("#total").val(total + " /=");
+        $("#total").val(total);
     }
 
     function bindPurchaseEditEvent() {
@@ -453,7 +453,8 @@
                 cusAddress: cusAddress,
                 cusSalary: cusSalary
             },
-            items: cartDB
+            items: cartDB,
+            total: $("#total").val()
         };
 
         $.ajax({
