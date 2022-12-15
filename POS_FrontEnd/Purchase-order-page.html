@@ -254,7 +254,6 @@
             },
             error: function (error) {
                 let parse = JSON.parse(error.responseText);
-                alert(parse.message);
             }
         });
     }
@@ -278,7 +277,6 @@
             },
             error: function (error) {
                 let parse = JSON.parse(error.responseText);
-                alert(parse.message);
             }
         });
     }
@@ -294,13 +292,9 @@
                 $("#cusAddress").val(res.data.cusAddress);
                 $("#cusSalary").val(res.data.cusSalary);
 
-                alert(res.message);
-                bindEditEvent();
-                bindDeleteEvent();
             },
             error: function (error) {
                 let parse = JSON.parse(error.responseText);
-                alert(parse.message);
             }
         });
     });
@@ -321,14 +315,9 @@
                 } else {
                     $("#qty_OnHand").val(res.data.qty);
                 }
-
-                alert(res.message);
-                bindEditEvent();
-                bindDeleteEvent();
             },
             error: function (error) {
                 let parse = JSON.parse(error.responseText);
-                alert(parse.message);
             }
         });
     });

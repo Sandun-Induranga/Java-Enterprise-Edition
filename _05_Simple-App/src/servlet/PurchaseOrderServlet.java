@@ -145,10 +145,12 @@ public class PurchaseOrderServlet extends HttpServlet {
 
                 pstm.executeUpdate();
 
-                pstm = connection.prepareStatement("UPDATE Item SET qty=? WHERE code=?");
+                pstm = connection.prepareStatement("UPDATE Item SET qty=qty-? WHERE code=?");
 
                 pstm.setInt(1, Integer.parseInt(jsonObject.getString("qty")));
                 pstm.setString(2, jsonObject.getString("code"));
+
+                pstm.executeUpdate();
 
             }
 
