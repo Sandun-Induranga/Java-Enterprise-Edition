@@ -162,7 +162,7 @@
 
             <!-- Place Order Button -->
             <div>
-                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="btnPlaceOrder">
                     Place Order <i class="bi bi-shop"></i>
                 </button>
             </div>
@@ -436,6 +436,12 @@
         } else {
             $("#amount").val($("#totalAmount").val());
         }
+    });
+
+    $("#btnPlaceOrder").on("click", function () {
+        $.ajax({
+
+        });
     });
 
 </script>
