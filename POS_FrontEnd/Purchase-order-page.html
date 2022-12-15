@@ -385,8 +385,6 @@
             $("#tblCart > tbody").append(
                 `<tr><td>${cart.code}</td><td>${cart.name}</td><td>${cart.unitPrice}</td><td>${cart.qty}</td><td>${cart.total}</td><td><i class="bi bi-pencil-fill text-success me-4 purchase-order-edits"></i><i class="bi bi-trash text-danger purchase-order-deletes"></i></td></tr>`
             );
-            bindPurchaseEditEvent();
-            bindPurchaseDeleteEvent();
         }
         setTotal();
     }
@@ -396,7 +394,7 @@
         for (let cartItem of cartDB) {
             total += parseFloat(cartItem.total);
         }
-        $("#total").text(total + " /=");
+        $("#total").val(total + " /=");
     }
 
     function bindPurchaseEditEvent() {
