@@ -111,7 +111,7 @@ public class PurchaseOrderServlet extends HttpServlet {
         JsonReader reader = Json.createReader(req.getReader());
 
         JsonObject details = reader.readObject();
-        JsonObject customer = details.getJsonObject("customer");
+        String cusId = details.getString("cusId");
         JsonArray items = details.getJsonArray("items");
         String total = details.getString("total");
 
@@ -125,7 +125,7 @@ public class PurchaseOrderServlet extends HttpServlet {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
             PreparedStatement pstm = connection.prepareStatement("INSERT INTO `Order` VALUES (?,?,?)");
             pstm.setString(1, orderId);
-            pstm.setString(2, customer.getString("cusId"));
+            pstm.setString(2, cusId);
             pstm.setDouble(3, Double.parseDouble(total));
 
             pstm.executeUpdate();

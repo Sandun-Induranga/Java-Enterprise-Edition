@@ -435,12 +435,7 @@
         let cusSalary = $("#cusSalary").val();
 
         let json = {
-            customer: {
-                cusId: cusId,
-                cusName: cusName,
-                cusAddress: cusAddress,
-                cusSalary: cusSalary
-            },
+            cusId: cusId,
             items: cartDB,
             total: $("#total").val()
         };
