@@ -122,12 +122,12 @@ public class PurchaseOrderServlet extends HttpServlet {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
-//            PreparedStatement pstm = connection.prepareStatement("INSERT INTO `Order` VALUES (?,?,?)");
-//            pstm.setString(1, "O001");
-//            pstm.setString(2, customer.getString("cusId"));
-//            pstm.setDouble(3, Double.parseDouble(total));
-//
-//            pstm.executeUpdate();
+            PreparedStatement pstm = connection.prepareStatement("INSERT INTO `Order` VALUES (?,?,?)");
+            pstm.setString(1, "O001");
+            pstm.setString(2, customer.getString("cusId"));
+            pstm.setDouble(3, Double.parseDouble(total));
+
+            pstm.executeUpdate();
             PreparedStatement pstm = connection.prepareStatement("INSERT INTO Order_Detail VALUES (?,?,?,?)");
 
             for (JsonValue item : items) {
