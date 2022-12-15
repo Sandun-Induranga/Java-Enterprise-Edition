@@ -120,26 +120,35 @@ public class PurchaseOrderServlet extends HttpServlet {
         System.out.println(items);
 
         try {
+
+            String orderId = generateNewID();
+
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
             PreparedStatement pstm = connection.prepareStatement("INSERT INTO `Order` VALUES (?,?,?)");
-            pstm.setString(1, "O001");
+            pstm.setString(1, orderId);
             pstm.setString(2, customer.getString("cusId"));
             pstm.setDouble(3, Double.parseDouble(total));
 
             pstm.executeUpdate();
-            PreparedStatement pstm = connection.prepareStatement("INSERT INTO Order_Detail VALUES (?,?,?,?)");
 
             for (JsonValue item : items) {
 
+                pstm = connection.prepareStatement("INSERT INTO Order_Detail VALUES (?,?,?,?)");
+
                 JsonObject jsonObject = item.asJsonObject();
 
-                pstm.setString(1,"O001");
-                pstm.setString(2,jsonObject.getString("code"));
-                pstm.setDouble(3,Double.parseDouble(jsonObject.getString("unitPrice")));
-                pstm.setInt(4,Integer.parseInt(jsonObject.getString("unitPrice")));
+                pstm.setString(1, orderId);
+                pstm.setString(2, jsonObject.getString("code"));
+                pstm.setDouble(3, Double.parseDouble(jsonObject.getString("unitPrice")));
+                pstm.setInt(4, Integer.parseInt(jsonObject.getString("qty")));
 
                 pstm.executeUpdate();
+
+                pstm = connection.prepareStatement("UPDATE Item SET qty=? WHERE code=?");
+
+                pstm.setInt(1, Integer.parseInt(jsonObject.getString("qty")));
+                pstm.setString(2, jsonObject.getString("code"));
 
             }
 
@@ -149,5 +158,19 @@ public class PurchaseOrderServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public String generateNewID() throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
+        PreparedStatement pstm = connection.prepareStatement("SELECT orderId FROM `Order` ORDER BY orderId DESC LIMIT 1;");
+        ResultSet rst = pstm.executeQuery();
+        if (rst.next()) {
+            String id = rst.getString("orderId");
+            int newCustomerId = Integer.parseInt(id.replace("O", "")) + 1;
+            return String.format("O%03d", newCustomerId);
+        } else {
+            return "O001";
+        }
     }
 }
