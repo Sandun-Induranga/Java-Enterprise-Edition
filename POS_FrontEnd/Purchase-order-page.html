@@ -446,14 +446,15 @@
         let cusAddress = $("#cusAddress").val();
         let cusSalary = $("#cusSalary").val();
 
-        let json = [
-            {
+        let json = {
+            customer: {
                 cusId: cusId,
                 cusName: cusName,
                 cusAddress: cusAddress,
                 cusSalary: cusSalary
-            }, cartDB
-        ]
+            },
+            items: cartDB
+        };
 
         $.ajax({
             url: baseUrl + "order",

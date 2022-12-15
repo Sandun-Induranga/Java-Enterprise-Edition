@@ -2,8 +2,7 @@ package servlet;
 
 import model.CustomerDTO;
 
-import javax.json.Json;
-import javax.json.JsonObjectBuilder;
+import javax.json.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -104,5 +103,19 @@ public class PurchaseOrderServlet extends HttpServlet {
         resp.addHeader("Content-Type", "application/json");
         resp.addHeader("Access-Control-Allow-Origin", "*");
 
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        JsonReader reader = Json.createReader(req.getReader());
+
+        JsonObject details = reader.readObject();
+        JsonObject customer = details.getJsonObject("customer");
+        JsonArray items = details.getJsonArray("items");
+
+        System.out.println(details);
+        System.out.println(customer);
+        System.out.println(items);
     }
 }
