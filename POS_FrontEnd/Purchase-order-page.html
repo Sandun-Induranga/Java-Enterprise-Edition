@@ -312,14 +312,14 @@
             success: function (res) {
 
                 // var item = searchItem($(this).val());
-                // var cartItem = searchCartItem($(this).val());
-                // $("#item_name").val(item.itemName);
-                // $("#unitPrice").val(item.unitPrice);
-                // if (cartItem != null) {
-                //     $("#qty_OnHand").val(parseInt(item.qty) - parseInt(cartItem.qty));
-                // } else {
-                //     $("#qty_OnHand").val(item.qty);
-                // }
+                var cartItem = searchCartItem($("#cmbItemCode").val());
+                $("#item_name").val(res.data.name);
+                $("#unitPrice").val(res.data.price);
+                if (cartItem != null) {
+                    $("#qty_OnHand").val(parseInt(res.data.qty) - parseInt(cartItem.qty));
+                } else {
+                    $("#qty_OnHand").val(res.data.qty);
+                }
 
                 alert(res.message);
                 bindEditEvent();
