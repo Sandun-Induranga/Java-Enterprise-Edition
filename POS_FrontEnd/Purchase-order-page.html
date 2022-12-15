@@ -446,7 +446,7 @@
         let cusAddress = $("#cusAddress").val();
         let cusSalary = $("#cusSalary").val();
 
-        let details = [
+        let json = [
             {
                 cusId: cusId,
                 cusName: cusName,
@@ -456,7 +456,13 @@
         ]
 
         $.ajax({
+            url: baseUrl + "order",
+            type: "post",
+            data: JSON.stringify(json),
+            dataType: "json",
+            success: function () {
 
+            }
         });
     });
 
