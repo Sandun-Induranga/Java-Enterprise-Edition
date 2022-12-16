@@ -9,7 +9,7 @@ import java.io.IOException;
  * @since : 0.1.0
  **/
 
-@WebFilter(urlPatterns = "/a")
+//@WebFilter(urlPatterns = "/a")
 public class FilterOne implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

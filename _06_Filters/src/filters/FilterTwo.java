@@ -9,7 +9,7 @@ import java.io.IOException;
  * @since : 0.1.0
  **/
 
-@WebFilter(urlPatterns = "/b")
+//@WebFilter(urlPatterns = "/b")
 public class FilterTwo implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -20,11 +20,14 @@ public class FilterTwo implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         System.out.println("Filter Two do Filter Method Invoked");
         String name = servletRequest.getParameter("name");
-        if (name.equals("ijse")){
+
+        if (name.equals("ijse")) {
             servletResponse.getWriter().write("<h1>Authenticated User</h1>");
-        }else {
+            filterChain.doFilter(servletRequest, servletResponse);
+        } else {
             servletResponse.getWriter().write("<h1>Non Authenticated User</h1>");
         }
+
     }
 
     @Override
