@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/Mapping-Specifications/Mapping-Specifications.iml" filepath="$PROJECT_DIR$/Mapping-Specifications/Mapping-Specifications.iml" />
       <module fileurl="file://$PROJECT_DIR$/POS_FrontEnd.iml" filepath="$PROJECT_DIR$/POS_FrontEnd.iml" />
       <module fileurl="file://$PROJECT_DIR$/_05_Simple-App/_05_Simple-App.iml" filepath="$PROJECT_DIR$/_05_Simple-App/_05_Simple-App.iml" />
+      <module fileurl="file://$PROJECT_DIR$/_06_Filters/_06_Filters.iml" filepath="$PROJECT_DIR$/_06_Filters/_06_Filters.iml" />
     </modules>
   </component>
 </project>
