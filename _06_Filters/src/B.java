@@ -9,7 +9,7 @@ import java.io.IOException;
  * @author : Sandun Induranga
  * @since : 0.1.0
  **/
-@WebServlet
+@WebServlet(urlPatterns = "/b")
 public class B extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
