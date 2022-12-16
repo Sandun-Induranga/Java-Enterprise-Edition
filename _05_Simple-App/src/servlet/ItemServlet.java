@@ -74,7 +74,6 @@ public class ItemServlet extends HttpServlet {
 
             resp.getWriter().print(obj.build());
         }
-        resp.addHeader("Access-Control-Allow-Origin", "*");
     }
 
     @Override
@@ -162,7 +161,6 @@ public class ItemServlet extends HttpServlet {
         }
 
         resp.addHeader("Content-Type", "application/json");
-        resp.addHeader("Access-Control-Allow-Origin", "*");
 
     }
 
@@ -213,7 +211,6 @@ public class ItemServlet extends HttpServlet {
 
             resp.getWriter().print(obj.build());
         }
-        resp.addHeader("Access-Control-Allow-Origin", "*");
     }
 
     @Override
@@ -271,7 +268,6 @@ public class ItemServlet extends HttpServlet {
 
             resp.getWriter().print(obj.build());
         }
-        resp.addHeader("Access-Control-Allow-Origin", "*");
     }
 
     @Override

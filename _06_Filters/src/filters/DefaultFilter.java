@@ -26,19 +26,20 @@ public class DefaultFilter implements Filter {
 
         if (name.equals("ijse")) {
 //            servletResponse.getWriter().write("<h1>Authenticated User</h1>");
-            if (servletPath.equals("/a")||servletPath.equals("/b")){
-                    filterChain.doFilter(servletRequest, servletResponse);
-            }else {
+            if (servletPath.equals("/a") || servletPath.equals("/b")) {
+                filterChain.doFilter(servletRequest, servletResponse);
+            } else {
                 servletResponse.getWriter().write("<h1>No Servlet Like This</h1>");
             }
-
         } else {
             servletResponse.getWriter().write("<h1>Non Authenticated User</h1>");
         }
+
     }
 
     @Override
     public void destroy() {
 
     }
+
 }
