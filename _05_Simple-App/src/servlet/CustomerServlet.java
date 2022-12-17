@@ -116,7 +116,6 @@ public class CustomerServlet extends HttpServlet {
 
             resp.getWriter().print(obj.build());
         }
-        resp.addHeader("Access-Control-Allow-Origin", "*");
     }
 
     @Override
@@ -203,7 +202,6 @@ public class CustomerServlet extends HttpServlet {
             resp.getWriter().print(obj.build());
         }
 
-        resp.addHeader("Content-Type", "application/json");
 //        resp.addHeader("Access-Control-Allow-Origin", "*");
 
     }
@@ -255,7 +253,6 @@ public class CustomerServlet extends HttpServlet {
 
             resp.getWriter().print(obj.build());
         }
-        resp.addHeader("Access-Control-Allow-Origin", "*");
     }
 
     @Override
@@ -312,16 +309,9 @@ public class CustomerServlet extends HttpServlet {
 
             resp.getWriter().print(obj.build());
         }
-        resp.addHeader("Access-Control-Allow-Origin", "*");
+
     }
 
-    @Override
-    protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.addHeader("Access-Control-Allow-Origin", "*");
-        resp.addHeader("Access-Control-Allow-Methods", "DELETE");
-        resp.addHeader("Access-Control-Allow-Methods", "PUT");
-        resp.addHeader("Access-Control-Allow-Headers", "content-type");
-    }
 }
 
 // ContentType Header

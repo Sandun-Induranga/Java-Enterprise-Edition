@@ -160,8 +160,6 @@ public class ItemServlet extends HttpServlet {
             resp.getWriter().print(obj.build());
         }
 
-        resp.addHeader("Content-Type", "application/json");
-
     }
 
     @Override
@@ -268,14 +266,6 @@ public class ItemServlet extends HttpServlet {
 
             resp.getWriter().print(obj.build());
         }
-    }
-
-    @Override
-    protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.addHeader("Access-Control-Allow-Origin", "*");
-        resp.addHeader("Access-Control-Allow-Methods", "DELETE");
-        resp.addHeader("Access-Control-Allow-Methods", "PUT");
-        resp.addHeader("Access-Control-Allow-Headers", "content-type");
     }
 }
 
