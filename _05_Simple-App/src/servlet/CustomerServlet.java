@@ -215,8 +215,10 @@ public class CustomerServlet extends HttpServlet {
 
             String cusId = req.getParameter("cusId");
 
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
+//            Class.forName("com.mysql.jdbc.Driver");
+//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
+
+            Connection connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement pstm = connection.prepareStatement("DELETE FROM Customer WHERE customerId=?");
 
             pstm.setString(1, cusId);
@@ -237,15 +239,15 @@ public class CustomerServlet extends HttpServlet {
                 throw new SQLException("No Such Customer ID");
             }
 
-        } catch (ClassNotFoundException e) {
-            JsonObjectBuilder obj = Json.createObjectBuilder();
-
-            obj.add("state", "Error");
-            obj.add("message", e.getLocalizedMessage());
-            obj.add("data", "");
-            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 // Server Side Errors
-
-            resp.getWriter().print(obj.build());
+//        } catch (ClassNotFoundException e) {
+//            JsonObjectBuilder obj = Json.createObjectBuilder();
+//
+//            obj.add("state", "Error");
+//            obj.add("message", e.getLocalizedMessage());
+//            obj.add("data", "");
+//            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 // Server Side Errors
+//
+//            resp.getWriter().print(obj.build());
         } catch (SQLException e) {
             JsonObjectBuilder obj = Json.createObjectBuilder();
 
@@ -272,8 +274,10 @@ public class CustomerServlet extends HttpServlet {
 
         try {
 
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
+//            Class.forName("com.mysql.jdbc.Driver");
+//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
+
+            Connection connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement pstm = connection.prepareStatement("UPDATE Customer SET customerName=?, address=?, salary=? WHERE customerId=?");
 
             pstm.setString(1, cusName);
@@ -293,15 +297,15 @@ public class CustomerServlet extends HttpServlet {
             }else {
                 throw new SQLException("No Such Customer ID");
             }
-        } catch (ClassNotFoundException e) {
-            JsonObjectBuilder obj = Json.createObjectBuilder();
-
-            obj.add("state", "Error");
-            obj.add("message", e.getLocalizedMessage());
-            obj.add("data", "");
-            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 // Server Side Errors
-
-            resp.getWriter().print(obj.build());
+//        } catch (ClassNotFoundException e) {
+//            JsonObjectBuilder obj = Json.createObjectBuilder();
+//
+//            obj.add("state", "Error");
+//            obj.add("message", e.getLocalizedMessage());
+//            obj.add("data", "");
+//            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 // Server Side Errors
+//
+//            resp.getWriter().print(obj.build());
         } catch (SQLException e) {
             JsonObjectBuilder obj = Json.createObjectBuilder();
 
