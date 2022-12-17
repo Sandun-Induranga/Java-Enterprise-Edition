@@ -9,9 +9,16 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="commons-dbcp2-2.9.0" />
           <element id="library" level="project" name="javax.json-1.1.4" />
-          <element id="library" level="project" name="javax.json-api-1.1.4" />
+          <element id="library" level="project" name="javax.json-1.1.41" />
           <element id="library" level="project" name="mysql-connector-java-8.0.28" />
           <element id="library" level="project" name="mysql-connector-java-8.0.28 (2)" />
+          <element id="library" level="project" name="javax.json-api-1.1.4" />
+          <element id="library" level="project" name="javax.json-1.1.4 (2)" />
+          <element id="library" level="project" name="javax.json-api-1.1.4 (2)" />
+          <element id="library" level="project" name="mysql-connector-java-8.0.28 (3)" />
+          <element id="library" level="project" name="commons-dbcp2-2.9.0 (2)" />
+          <element id="library" level="project" name="commons-logging-1.2" />
+          <element id="library" level="project" name="commons-pool2-2.11.1" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="_07_DBCP/web/Web" />

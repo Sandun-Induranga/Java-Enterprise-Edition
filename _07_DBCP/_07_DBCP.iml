@@ -24,5 +24,13 @@
     <orderEntry type="library" name="javax.json-api-1.1.4" level="project" />
     <orderEntry type="library" name="mysql-connector-java-8.0.28" level="project" />
     <orderEntry type="library" name="mysql-connector-java-8.0.28 (2)" level="project" />
+    <orderEntry type="library" name="javax.json-1.1.41" level="project" />
+    <orderEntry type="library" name="Tomcat 8.5.83" level="application_server_libraries" />
+    <orderEntry type="library" name="javax.json-1.1.4 (2)" level="project" />
+    <orderEntry type="library" name="javax.json-api-1.1.4 (2)" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-8.0.28 (3)" level="project" />
+    <orderEntry type="library" name="commons-dbcp2-2.9.0 (2)" level="project" />
+    <orderEntry type="library" name="commons-logging-1.2" level="project" />
+    <orderEntry type="library" name="commons-pool2-2.11.1" level="project" />
   </component>
 </module>

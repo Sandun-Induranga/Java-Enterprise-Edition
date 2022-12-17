@@ -1,28 +1,33 @@
 package db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import org.apache.commons.dbcp2.BasicDataSource;
 
-/**
- * @author : Sandun Induranga
- * @since : 0.1.0
- **/
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class DBConnection {
     private static DBConnection dbConnection;
-    private final Connection connection;
+    BasicDataSource bds;
+    private DBConnection(){
+        bds= new BasicDataSource();
+        bds.setDriverClassName("com.mysql.jdbc.Driver");
+        bds.setUrl("jdbc:mysql://localhost:3306/POS");
+        bds.setPassword("1234");
+        bds.setUsername("sandu");
+        // how many connection
+        bds.setMaxTotal(2);
+        // how many connection should be initialized from created connections
+        bds.setInitialSize(2);
 
-    private DBConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
+    }
+    public static DBConnection getDbConnection(){
+        if (dbConnection==null){
+            dbConnection= new DBConnection();
+        }
+        return dbConnection;
     }
 
-    public static DBConnection getDbConnection() throws SQLException, ClassNotFoundException {
-        return dbConnection == null ? dbConnection= new DBConnection() : dbConnection;
-    }
-
-    public Connection getConnection() {
-        return connection;
+    public Connection getConnection() throws SQLException {
+        return bds.getConnection();
     }
 }

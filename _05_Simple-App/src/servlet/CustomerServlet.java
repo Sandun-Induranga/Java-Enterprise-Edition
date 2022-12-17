@@ -2,7 +2,6 @@ package servlet;
 
 import com.mysql.cj.xdevapi.JsonArray;
 import model.CustomerDTO;
-import org.apache.commons.dbcp2.BasicDataSource;
 
 import javax.json.*;
 import javax.servlet.ServletException;
@@ -31,17 +30,8 @@ public class CustomerServlet extends HttpServlet {
         System.out.println("come");
 
         try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
-            BasicDataSource bds = new BasicDataSource();
-            bds.setDriverClassName("com.mysql.jdbc.Driver");
-            bds.setUrl("jdbc:mysql://localhost:3306/POS");
-            bds.setUsername("sandu");
-            bds.setPassword("1234");
-            bds.setMaxTotal(2);
-            bds.setInitialSize(2);
-
-            Connection connection = bds.getConnection();
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
 
             PreparedStatement pstm = connection.prepareStatement("INSERT INTO Customer VALUES (?,?,?,?)");
 
@@ -105,17 +95,17 @@ public class CustomerServlet extends HttpServlet {
 //                }
 //            }
 
-//        } catch (ClassNotFoundException e) {
-//
-//            JsonObjectBuilder obj = Json.createObjectBuilder();
-//
-//            obj.add("state", "Error");
-//            obj.add("message", e.getLocalizedMessage());
-//            obj.add("data", "");
-//            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 // Server Side Errors
-//
-//            resp.getWriter().print(obj.build());
-//
+        } catch (ClassNotFoundException e) {
+
+            JsonObjectBuilder obj = Json.createObjectBuilder();
+
+            obj.add("state", "Error");
+            obj.add("message", e.getLocalizedMessage());
+            obj.add("data", "");
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 // Server Side Errors
+
+            resp.getWriter().print(obj.build());
+
         } catch (SQLException e) {
             JsonObjectBuilder obj = Json.createObjectBuilder();
 
@@ -126,6 +116,7 @@ public class CustomerServlet extends HttpServlet {
 
             resp.getWriter().print(obj.build());
         }
+        resp.addHeader("Access-Control-Allow-Origin", "*");
     }
 
     @Override
@@ -165,19 +156,8 @@ public class CustomerServlet extends HttpServlet {
 
         try {
 
-//            Class.forName("com.mysql.jdbc.Driver");
-//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
-
-            BasicDataSource bds = new BasicDataSource();
-            bds.setDriverClassName("com.mysql.jdbc.Driver");
-            bds.setUrl("jdbc:mysql://localhost:3306/POS");
-            bds.setUsername("sandu");
-            bds.setPassword("1234");
-            bds.setMaxTotal(2);
-            bds.setInitialSize(2);
-
-            Connection connection = bds.getConnection();
-
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
             PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer");
             ResultSet resultSet = pstm.executeQuery();
 
@@ -194,24 +174,24 @@ public class CustomerServlet extends HttpServlet {
 
             }
 
-                JsonObjectBuilder obj = Json.createObjectBuilder();
+            JsonObjectBuilder obj = Json.createObjectBuilder();
 
-                obj.add("state", "OK");
-                obj.add("message", "Successfully Loaded..!");
-                obj.add("data", allCustomers);
-                resp.setStatus(200);
+            obj.add("state", "OK");
+            obj.add("message", "Successfully Loaded..!");
+            obj.add("data", allCustomers);
+            resp.setStatus(200);
 
-                resp.getWriter().print(obj.build());
+            resp.getWriter().print(obj.build());
 
-//        } catch (ClassNotFoundException e) {
-//            JsonObjectBuilder obj = Json.createObjectBuilder();
-//
-//            obj.add("state", "Error");
-//            obj.add("message", e.getLocalizedMessage());
-//            obj.add("data", "");
-//            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 // Server Side Errors
-//
-//            resp.getWriter().print(obj.build());
+        } catch (ClassNotFoundException e) {
+            JsonObjectBuilder obj = Json.createObjectBuilder();
+
+            obj.add("state", "Error");
+            obj.add("message", e.getLocalizedMessage());
+            obj.add("data", "");
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 // Server Side Errors
+
+            resp.getWriter().print(obj.build());
         } catch (SQLException e) {
             JsonObjectBuilder obj = Json.createObjectBuilder();
 
@@ -223,6 +203,9 @@ public class CustomerServlet extends HttpServlet {
             resp.getWriter().print(obj.build());
         }
 
+        resp.addHeader("Content-Type", "application/json");
+//        resp.addHeader("Access-Control-Allow-Origin", "*");
+
     }
 
     @Override
@@ -231,19 +214,8 @@ public class CustomerServlet extends HttpServlet {
 
             String cusId = req.getParameter("cusId");
 
-//            Class.forName("com.mysql.jdbc.Driver");
-//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
-
-            BasicDataSource bds = new BasicDataSource();
-            bds.setDriverClassName("com.mysql.jdbc.Driver");
-            bds.setUrl("jdbc:mysql://localhost:3306/POS");
-            bds.setUsername("sandu");
-            bds.setPassword("1234");
-            bds.setMaxTotal(2);
-            bds.setInitialSize(2);
-
-            Connection connection = bds.getConnection();
-
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
             PreparedStatement pstm = connection.prepareStatement("DELETE FROM Customer WHERE customerId=?");
 
             pstm.setString(1, cusId);
@@ -264,15 +236,15 @@ public class CustomerServlet extends HttpServlet {
                 throw new SQLException("No Such Customer ID");
             }
 
-//        } catch (ClassNotFoundException e) {
-//            JsonObjectBuilder obj = Json.createObjectBuilder();
-//
-//            obj.add("state", "Error");
-//            obj.add("message", e.getLocalizedMessage());
-//            obj.add("data", "");
-//            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 // Server Side Errors
-//
-//            resp.getWriter().print(obj.build());
+        } catch (ClassNotFoundException e) {
+            JsonObjectBuilder obj = Json.createObjectBuilder();
+
+            obj.add("state", "Error");
+            obj.add("message", e.getLocalizedMessage());
+            obj.add("data", "");
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 // Server Side Errors
+
+            resp.getWriter().print(obj.build());
         } catch (SQLException e) {
             JsonObjectBuilder obj = Json.createObjectBuilder();
 
@@ -283,6 +255,7 @@ public class CustomerServlet extends HttpServlet {
 
             resp.getWriter().print(obj.build());
         }
+        resp.addHeader("Access-Control-Allow-Origin", "*");
     }
 
     @Override
@@ -299,19 +272,8 @@ public class CustomerServlet extends HttpServlet {
 
         try {
 
-//            Class.forName("com.mysql.jdbc.Driver");
-//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
-
-            BasicDataSource bds = new BasicDataSource();
-            bds.setDriverClassName("com.mysql.jdbc.Driver");
-            bds.setUrl("jdbc:mysql://localhost:3306/POS");
-            bds.setUsername("sandu");
-            bds.setPassword("1234");
-            bds.setMaxTotal(2);
-            bds.setInitialSize(2);
-
-            Connection connection = bds.getConnection();
-
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
             PreparedStatement pstm = connection.prepareStatement("UPDATE Customer SET customerName=?, address=?, salary=? WHERE customerId=?");
 
             pstm.setString(1, cusName);
@@ -331,15 +293,15 @@ public class CustomerServlet extends HttpServlet {
             }else {
                 throw new SQLException("No Such Customer ID");
             }
-//        } catch (ClassNotFoundException e) {
-//            JsonObjectBuilder obj = Json.createObjectBuilder();
-//
-//            obj.add("state", "Error");
-//            obj.add("message", e.getLocalizedMessage());
-//            obj.add("data", "");
-//            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 // Server Side Errors
-//
-//            resp.getWriter().print(obj.build());
+        } catch (ClassNotFoundException e) {
+            JsonObjectBuilder obj = Json.createObjectBuilder();
+
+            obj.add("state", "Error");
+            obj.add("message", e.getLocalizedMessage());
+            obj.add("data", "");
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 // Server Side Errors
+
+            resp.getWriter().print(obj.build());
         } catch (SQLException e) {
             JsonObjectBuilder obj = Json.createObjectBuilder();
 
@@ -350,8 +312,16 @@ public class CustomerServlet extends HttpServlet {
 
             resp.getWriter().print(obj.build());
         }
+        resp.addHeader("Access-Control-Allow-Origin", "*");
     }
 
+    @Override
+    protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.addHeader("Access-Control-Allow-Origin", "*");
+        resp.addHeader("Access-Control-Allow-Methods", "DELETE");
+        resp.addHeader("Access-Control-Allow-Methods", "PUT");
+        resp.addHeader("Access-Control-Allow-Headers", "content-type");
+    }
 }
 
 // ContentType Header

@@ -173,7 +173,7 @@
 
 <script>
 
-    const baseUrl = "http://localhost:8080/App_05/";
+    // const baseUrl = "http://localhost:8080/App_05/";
 
     loadAllCustomers();
 
@@ -189,7 +189,7 @@
 
         if ($(this).text() == "Save") {
             $.ajax({
-                url: baseUrl + "customer",
+                url: "http://localhost:8080/App_05/" + "customer",
                 type: "post",
                 data: formData,
                 dataType: "json",
@@ -204,7 +204,7 @@
             });
         } else {
             $.ajax({
-                url: baseUrl + "customer",
+                url: "http://localhost:8080/App_05/" + "customer",
                 method: "put",
                 contentType: "application/json",
                 data: JSON.stringify(json),
@@ -251,7 +251,7 @@
             console.log(id)
 
             $.ajax({
-                url: baseUrl + "customer?cusId=" + id.trim(),
+                url: "http://localhost:8080/App_05/" + "customer?cusId=" + id.trim(),
                 method: "delete",
                 dataType: "json",
                 success: function (res) {
@@ -280,16 +280,17 @@
 
     function loadAllCustomers() {
         $.ajax({
-            url: baseUrl+"customer",
-            method: "get",
+            url: "http://localhost:8080/App_05/" +"customer",
+            type: "get",
             dataType: "json",
             success: function (res) {
 
                 $("#body").empty();
-                for (let customer of res.data) {
 
+                for (let customer of res.data) {
                     $("#body").append(`<tr><td>` + customer.id + `</td><td>` + customer.name + `</td><td>` + customer.address + `</td><td>` + customer.salary + `</td><td><button type="button" class="border border-0 customer-edits"><i class="bi bi-pencil-fill text-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i></button><button class="border border-0 customer-deletes"><i class="bi bi-trash text-danger"></i></button></td></tr>`);
                 }
+
                 alert(res.message);
                 bindEditEvent();
                 bindDeleteEvent();
