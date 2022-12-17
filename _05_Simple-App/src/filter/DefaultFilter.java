@@ -25,7 +25,6 @@ public class DefaultFilter implements Filter {
         resp.addHeader("Access-Control-Allow-Methods","DELETE,PUT");
         resp.addHeader("Access-Control-Allow-Headers","Content-Type");
         resp.setContentType("application/json");
-
     }
 
     @Override

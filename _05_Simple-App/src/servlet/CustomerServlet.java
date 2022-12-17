@@ -1,6 +1,7 @@
 package servlet;
 
 import com.mysql.cj.xdevapi.JsonArray;
+import db.DBConnection;
 import model.CustomerDTO;
 
 import javax.json.*;
@@ -155,8 +156,10 @@ public class CustomerServlet extends HttpServlet {
 
         try {
 
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
+//            Class.forName("com.mysql.jdbc.Driver");
+//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
+
+            Connection connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer");
             ResultSet resultSet = pstm.executeQuery();
 
@@ -182,15 +185,15 @@ public class CustomerServlet extends HttpServlet {
 
             resp.getWriter().print(obj.build());
 
-        } catch (ClassNotFoundException e) {
-            JsonObjectBuilder obj = Json.createObjectBuilder();
-
-            obj.add("state", "Error");
-            obj.add("message", e.getLocalizedMessage());
-            obj.add("data", "");
-            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 // Server Side Errors
-
-            resp.getWriter().print(obj.build());
+//        } catch (ClassNotFoundException e) {
+//            JsonObjectBuilder obj = Json.createObjectBuilder();
+//
+//            obj.add("state", "Error");
+//            obj.add("message", e.getLocalizedMessage());
+//            obj.add("data", "");
+//            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 // Server Side Errors
+//
+//            resp.getWriter().print(obj.build());
         } catch (SQLException e) {
             JsonObjectBuilder obj = Json.createObjectBuilder();
 
