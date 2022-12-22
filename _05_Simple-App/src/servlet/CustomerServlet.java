@@ -31,8 +31,10 @@ public class CustomerServlet extends HttpServlet {
         System.out.println("come");
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
+//            Class.forName("com.mysql.jdbc.Driver");
+//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
+
+            Connection connection = DBConnection.getDbConnection().getConnection();
 
             PreparedStatement pstm = connection.prepareStatement("INSERT INTO Customer VALUES (?,?,?,?)");
 
@@ -41,6 +43,8 @@ public class CustomerServlet extends HttpServlet {
             pstm.setString(3, cusAddress);
             pstm.setDouble(4, cusSalary);
             boolean b = pstm.executeUpdate() > 0;
+
+            connection.close();
 
             if (b) {
 
@@ -95,17 +99,17 @@ public class CustomerServlet extends HttpServlet {
 //
 //                }
 //            }
-
-        } catch (ClassNotFoundException e) {
-
-            JsonObjectBuilder obj = Json.createObjectBuilder();
-
-            obj.add("state", "Error");
-            obj.add("message", e.getLocalizedMessage());
-            obj.add("data", "");
-            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 // Server Side Errors
-
-            resp.getWriter().print(obj.build());
+//
+//        } catch (ClassNotFoundException e) {
+//
+//            JsonObjectBuilder obj = Json.createObjectBuilder();
+//
+//            obj.add("state", "Error");
+//            obj.add("message", e.getLocalizedMessage());
+//            obj.add("data", "");
+//            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 // Server Side Errors
+//
+//            resp.getWriter().print(obj.build());
 
         } catch (SQLException e) {
             JsonObjectBuilder obj = Json.createObjectBuilder();
@@ -176,6 +180,8 @@ public class CustomerServlet extends HttpServlet {
 
             }
 
+            connection.close();
+
             JsonObjectBuilder obj = Json.createObjectBuilder();
 
             obj.add("state", "OK");
@@ -223,6 +229,8 @@ public class CustomerServlet extends HttpServlet {
 
             pstm.setString(1, cusId);
             boolean b = pstm.executeUpdate() > 0;
+
+            connection.close();
 
             if (b) {
 
@@ -285,6 +293,9 @@ public class CustomerServlet extends HttpServlet {
             pstm.setString(3, cusSalary);
             pstm.setString(4, cusId);
             boolean b = pstm.executeUpdate() > 0;
+
+            connection.close();
+
             if (b){
                 JsonObjectBuilder obj = Json.createObjectBuilder();
 
