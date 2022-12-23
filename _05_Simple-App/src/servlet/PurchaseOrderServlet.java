@@ -2,12 +2,14 @@ package servlet;
 
 import model.CustomerDTO;
 
+import javax.annotation.Resource;
 import javax.json.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.*;
 
@@ -18,14 +20,15 @@ import java.sql.*;
 
 @WebServlet("/order")
 public class PurchaseOrderServlet extends HttpServlet {
+
+    @Resource(name = "java:comp/env/jdbc/pool")
+    DataSource dataSource;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String option = req.getParameter("option");
 
-        try {
+        try (Connection connection = dataSource.getConnection()){
 
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
             PreparedStatement pstm;
             ResultSet resultSet;
 
@@ -80,15 +83,6 @@ public class PurchaseOrderServlet extends HttpServlet {
                     break;
             }
 
-        } catch (ClassNotFoundException e) {
-            JsonObjectBuilder obj = Json.createObjectBuilder();
-
-            obj.add("state", "Error");
-            obj.add("message", e.getLocalizedMessage());
-            obj.add("data", "");
-            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-
-            resp.getWriter().print(obj.build());
         } catch (SQLException e) {
             JsonObjectBuilder obj = Json.createObjectBuilder();
 
@@ -100,8 +94,6 @@ public class PurchaseOrderServlet extends HttpServlet {
             resp.getWriter().print(obj.build());
         }
 
-        resp.addHeader("Content-Type", "application/json");
-        resp.addHeader("Access-Control-Allow-Origin", "*");
 
     }
 
@@ -117,12 +109,10 @@ public class PurchaseOrderServlet extends HttpServlet {
 
         boolean b = false;
 
-        try {
+        try (Connection connection = dataSource.getConnection()){
 
             String orderId = generateNewID();
 
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
             PreparedStatement pstm = connection.prepareStatement("INSERT INTO `Order` VALUES (?,?,?)");
             pstm.setString(1, orderId);
             pstm.setString(2, cusId);
@@ -187,7 +177,6 @@ public class PurchaseOrderServlet extends HttpServlet {
 
             resp.getWriter().print(obj.build());
         }
-        resp.addHeader("Access-Control-Allow-Origin", "*");
 
     }
 

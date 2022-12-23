@@ -248,8 +248,6 @@
                 }
 
                 alert(res.message);
-                bindEditEvent();
-                bindDeleteEvent();
             },
             error: function (error) {
                 let parse = JSON.parse(error.responseText);
@@ -271,8 +269,7 @@
                 }
 
                 alert(res.message);
-                bindEditEvent();
-                bindDeleteEvent();
+
             },
             error: function (error) {
                 let parse = JSON.parse(error.responseText);
@@ -444,7 +441,7 @@
             dataType: "json",
             success: function (res) {
                 alert(res.message);
-            },
+                console.log(json)           },
             error: function (error) {
                 let parse = JSON.parse(error.responseText);
                 alert(parse.message);

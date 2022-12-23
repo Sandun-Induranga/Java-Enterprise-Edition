@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
-  <artifact type="war" name="App-05">
+  <artifact type="war" name="App_05">
     <output-path>$PROJECT_DIR$/out/artifacts/App_05</output-path>
-    <root id="archive" name="App-05.war">
+    <root id="archive" name="App_05.war">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="_05_Simple-App" />
