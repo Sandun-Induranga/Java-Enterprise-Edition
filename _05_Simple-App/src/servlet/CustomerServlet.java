@@ -5,12 +5,14 @@ import com.mysql.cj.xdevapi.JsonArray;
 import model.CustomerDTO;
 import org.apache.commons.dbcp2.BasicDataSource;
 
+import javax.annotation.Resource;
 import javax.json.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -22,6 +24,10 @@ import java.util.ArrayList;
 
 @WebServlet(urlPatterns = "/customer")
 public class CustomerServlet extends HttpServlet {
+
+    @Resource(name = "java:comp/env/jdbc/pool")
+    DataSource dataSource;
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -31,8 +37,13 @@ public class CustomerServlet extends HttpServlet {
         double cusSalary = Double.parseDouble(req.getParameter("cusSalary"));
         System.out.println("come");
 
+
+
         // try resource - Auto close after finish try catch statements
-        try (/*Connection connection = DBConnection.getDbConnection().getConnection()*/Connection connection = ((BasicDataSource) getServletContext().getAttribute("pool")).getConnection()){
+        try (/*Connection connection = DBConnection.getDbConnection().getConnection()*/
+//                Connection connection = ((BasicDataSource) getServletContext().getAttribute("pool")).getConnection()
+                Connection connection = dataSource.getConnection()
+        ){
 //            Class.forName("com.mysql.jdbc.Driver");
 //            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
 
@@ -161,7 +172,10 @@ public class CustomerServlet extends HttpServlet {
         JsonArrayBuilder allCustomers = Json.createArrayBuilder();
 
 
-        try (/*Connection connection = DBConnection.getDbConnection().getConnection()*/Connection connection = ((BasicDataSource) getServletContext().getAttribute("pool")).getConnection()){
+        try (/*Connection connection = DBConnection.getDbConnection().getConnection()*/
+//                Connection connection = ((BasicDataSource) getServletContext().getAttribute("pool")).getConnection()
+                Connection connection = dataSource.getConnection()
+        ){
 
 //            Class.forName("com.mysql.jdbc.Driver");
 //            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
@@ -220,7 +234,10 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try (/*Connection connection = DBConnection.getDbConnection().getConnection()*/Connection connection = ((BasicDataSource) getServletContext().getAttribute("pool")).getConnection()){
+        try (/*Connection connection = DBConnection.getDbConnection().getConnection()*/
+//                Connection connection = ((BasicDataSource) getServletContext().getAttribute("pool")).getConnection()
+                Connection connection = dataSource.getConnection()
+        ){
 
             String cusId = req.getParameter("cusId");
 
@@ -283,7 +300,10 @@ public class CustomerServlet extends HttpServlet {
         String cusAddress = customer.getString("address");
         String cusSalary = customer.getString("cusSalary");
 
-        try(/*Connection connection = DBConnection.getDbConnection().getConnection()*/Connection connection = ((BasicDataSource) getServletContext().getAttribute("pool")).getConnection()) {
+        try(/*Connection connection = DBConnection.getDbConnection().getConnection()*/
+//                Connection connection = ((BasicDataSource) getServletContext().getAttribute("pool")).getConnection()
+                Connection connection = dataSource.getConnection()
+        ) {
 
 //            Class.forName("com.mysql.jdbc.Driver");
 //            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");

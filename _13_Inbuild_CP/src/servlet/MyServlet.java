@@ -35,6 +35,5 @@ public class MyServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        ;
     }
 }
