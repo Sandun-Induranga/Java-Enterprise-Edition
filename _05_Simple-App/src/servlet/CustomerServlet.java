@@ -1,8 +1,9 @@
 package servlet;
 
 import com.mysql.cj.xdevapi.JsonArray;
-import db.DBConnection;
+//import db.DBConnection;
 import model.CustomerDTO;
+import org.apache.commons.dbcp2.BasicDataSource;
 
 import javax.json.*;
 import javax.servlet.ServletException;
@@ -30,11 +31,12 @@ public class CustomerServlet extends HttpServlet {
         double cusSalary = Double.parseDouble(req.getParameter("cusSalary"));
         System.out.println("come");
 
-        try {
+        // try resource - Auto close after finish try catch statements
+        try (/*Connection connection = DBConnection.getDbConnection().getConnection()*/Connection connection = ((BasicDataSource) getServletContext().getAttribute("pool")).getConnection()){
 //            Class.forName("com.mysql.jdbc.Driver");
 //            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
 
-            Connection connection = DBConnection.getDbConnection().getConnection();
+//            Connection connection = DBConnection.getDbConnection().getConnection();
 
             PreparedStatement pstm = connection.prepareStatement("INSERT INTO Customer VALUES (?,?,?,?)");
 
@@ -44,7 +46,7 @@ public class CustomerServlet extends HttpServlet {
             pstm.setDouble(4, cusSalary);
             boolean b = pstm.executeUpdate() > 0;
 
-            connection.close();
+//            connection.close();
 
             if (b) {
 
@@ -158,12 +160,13 @@ public class CustomerServlet extends HttpServlet {
 
         JsonArrayBuilder allCustomers = Json.createArrayBuilder();
 
-        try {
+
+        try (/*Connection connection = DBConnection.getDbConnection().getConnection()*/Connection connection = ((BasicDataSource) getServletContext().getAttribute("pool")).getConnection()){
 
 //            Class.forName("com.mysql.jdbc.Driver");
 //            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
 
-            Connection connection = DBConnection.getDbConnection().getConnection();
+//            Connection connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer");
             ResultSet resultSet = pstm.executeQuery();
 
@@ -180,7 +183,7 @@ public class CustomerServlet extends HttpServlet {
 
             }
 
-            connection.close();
+//            connection.close();
 
             JsonObjectBuilder obj = Json.createObjectBuilder();
 
@@ -217,20 +220,20 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
+        try (/*Connection connection = DBConnection.getDbConnection().getConnection()*/Connection connection = ((BasicDataSource) getServletContext().getAttribute("pool")).getConnection()){
 
             String cusId = req.getParameter("cusId");
 
 //            Class.forName("com.mysql.jdbc.Driver");
 //            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
 
-            Connection connection = DBConnection.getDbConnection().getConnection();
+//            Connection connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement pstm = connection.prepareStatement("DELETE FROM Customer WHERE customerId=?");
 
             pstm.setString(1, cusId);
             boolean b = pstm.executeUpdate() > 0;
 
-            connection.close();
+//            connection.close();
 
             if (b) {
 
@@ -280,12 +283,12 @@ public class CustomerServlet extends HttpServlet {
         String cusAddress = customer.getString("address");
         String cusSalary = customer.getString("cusSalary");
 
-        try {
+        try(/*Connection connection = DBConnection.getDbConnection().getConnection()*/Connection connection = ((BasicDataSource) getServletContext().getAttribute("pool")).getConnection()) {
 
 //            Class.forName("com.mysql.jdbc.Driver");
 //            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/POS", "sandu", "1234");
 
-            Connection connection = DBConnection.getDbConnection().getConnection();
+//            Connection connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement pstm = connection.prepareStatement("UPDATE Customer SET customerName=?, address=?, salary=? WHERE customerId=?");
 
             pstm.setString(1, cusName);
