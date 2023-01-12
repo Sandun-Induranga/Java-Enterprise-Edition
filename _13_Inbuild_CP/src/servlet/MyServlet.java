@@ -17,6 +17,7 @@ import java.sql.SQLException;
  * @author : Sandun Induranga
  * @since : 0.1.0
  **/
+
 @WebServlet(urlPatterns = "/customer")
 public class MyServlet extends HttpServlet {
 
